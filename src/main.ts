@@ -1,14 +1,9 @@
 import { createApp } from 'vue'
 import { App } from './App'
-import { Bar } from './views/Bar'
-import { Foo } from './views/Foo'
 import { createRouter }  from 'vue-router'
-import { history } from './shared/history'
+import { history } from './shared/history';
+import { routes } from './shared/routes';
 
-const routes = [
-    { path: '/', component: Bar },
-    { path: '/about', component: Foo },
-  ]
 
 const router = createRouter({history,routes})
 const app = createApp(App)
