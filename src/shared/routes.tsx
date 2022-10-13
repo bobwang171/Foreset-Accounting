@@ -1,6 +1,11 @@
 import { Bar } from "../views/Bar";
 import { Foo } from "../views/Foo";
 import { RouteRecordRaw } from 'vue-router';
+import { First } from "../components/Welcome/First";
+import { Second } from "../components/Welcome/Second";
+import { Third } from "../components/Welcome/Third";
+import { Forth } from "../components/Welcome/Forth";
+import { Welcome } from "../views/welcome";
 
 
 export const routes: RouteRecordRaw[] = [
@@ -8,12 +13,12 @@ export const routes: RouteRecordRaw[] = [
     { path: '/about', component: Foo },
     {
         path: '/welcome',
-        component: Foo,
+        component: Welcome,
         children: [
-            { path: '/1', component: Foo },
-            { path: '/2', component: Foo },
-            { path: '/3', component: Foo },
-            { path: '/4', component: Foo }
+            { path: '1', component: First, },
+            { path: '2', component: Second,},
+            { path: '3', component: Third, },
+            { path: '4', component: Forth,}
         ]
     }
   ]
