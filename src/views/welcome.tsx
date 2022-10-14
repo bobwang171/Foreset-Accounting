@@ -1,6 +1,6 @@
 import { defineComponent } from "vue"
 import { RouterView } from 'vue-router';
-import s from "./welcome.module.scss"
+import s from "./Welcome.module.scss"
 import logo from "../assets/icon/mangosteen.svg"
 
 export const Welcome = defineComponent({
@@ -11,8 +11,8 @@ export const Welcome = defineComponent({
                 <img src={logo} />
                 <h1>山竹记账</h1>
             </header>
-            <main><RouterView/></main>
-            <footer>buttons</footer>
+            <main class={s.main}><RouterView/></main>
+        
 
             </div>
         

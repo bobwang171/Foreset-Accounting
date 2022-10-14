@@ -1,0 +1,38 @@
+.wrapper{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    > .card{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        background-color:var(--welcome-card-bg);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px 16px 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+         >h2{
+            margin-top: 40px;
+            line-height: 40px;
+        }
+        .pig{
+            height: 120px;
+        }
+    }
+    > .actions{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 16px;
+        font-size: 36px;
+        color:var(--welcome-text);
+        padding: 24px 0px;
+    > .fake {visibility: hidden;}
+
+    }
+
+    }
+    
