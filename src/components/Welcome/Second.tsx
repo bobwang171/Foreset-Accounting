@@ -2,11 +2,11 @@ import { defineComponent } from "vue"
 
 export const Second = defineComponent({
     setup() {
-        return () => {
+        return () => (
             <div>
                 Second
             </div>
-        }
+        )
         
     }
 })
