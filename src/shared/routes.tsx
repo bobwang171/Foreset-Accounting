@@ -1,5 +1,3 @@
-import { Bar } from "../views/Bar";
-import { Foo } from "../views/Foo";
 import { RouteRecordRaw } from 'vue-router';
 import { First } from "../components/Welcome/First";
 import { Second } from "../components/Welcome/Second";
