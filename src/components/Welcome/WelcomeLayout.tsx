@@ -1,7 +1,5 @@
 import { defineComponent } from "vue"
-import s from "./First.module.scss"
-import pig from "../../assets/icon/pig.svg"
-import { RouterLink } from "vue-router"
+import s from "./WelcomeLayout.module.scss"
 export const WelcomeLayout = defineComponent({
     setup: (props, context) => {
         const {slots}=context
