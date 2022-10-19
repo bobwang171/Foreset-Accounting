@@ -1,4 +1,3 @@
-import { defineComponent, render } from 'vue';
 import s from "./WelcomeLayout.module.scss"
 import chart from "../../assets/icon/chart.svg"
 import { RouterLink } from "vue-router"
