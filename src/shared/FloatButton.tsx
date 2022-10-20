@@ -1,8 +1,11 @@
 import { defineComponent } from 'vue';
-export const  = defineComponent({
+import { Icon } from './icon';
+export const FloatButton = defineComponent({
   setup: (props, context) => {
     return () => (
-      <div></div>
+        <div>
+            <Icon name="clock"/>
+      </div>
     )
   }
 })
