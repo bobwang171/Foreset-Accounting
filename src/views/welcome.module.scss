@@ -12,10 +12,11 @@
         align-items: center;
         padding-top: 66px;
         color: #d4d4ee;
-        > img{
-            height: 80px;
-            width: 80px;
+        > svg{
+            width: 64px;
+            height: 69px;
         }
+        
     }
     > main{
         flex-grow: 1;

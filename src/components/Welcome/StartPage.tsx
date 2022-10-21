@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue';
 import { Button } from '../../shared/Button';
-import s from '../Welcome/StartPage.module.scss';
 import { FloatButton } from '../../shared/FloatButton';
+import s from '../Welcome/StartPage.module.scss';
+
 export const StartPage = defineComponent({
     setup: (props, context) => {
         const onClick = () => {
