@@ -13,7 +13,7 @@ export const Forth = {
                 title:()=><h2>每日提醒<br />不遗漏每一笔账单</h2>,
                 buttons:()=> <>
                     <RouterLink to="/start" class={s.fake}>跳过</RouterLink>
-                    <RouterLink to="/welcome/start">完成</RouterLink>
+                    <RouterLink to="/start">完成</RouterLink>
                     <RouterLink to="/start" class={s.fake}>跳过</RouterLink>
                 </>
             }}
