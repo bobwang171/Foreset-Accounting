@@ -1,9 +1,7 @@
 import { defineComponent, PropType } from 'vue';
 import s from './NavBar.module.scss'
 export const NavBar = defineComponent({
-    props: {
-        type:String as PropType<string>
-    },
+
     setup: (props, context) => {
       const {slots}=context
     return () => (

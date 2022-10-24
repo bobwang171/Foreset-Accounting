@@ -4,15 +4,16 @@ import { Icon } from './icon';
 export const Overlay = defineComponent({
     props: {
         onClose: {
-            type:Function as PropType<()=>void>
+            type: Function as PropType<() => void>
         }
     },
 
+
     setup: (props, context) => {
-        
         const close = () => {
             props.onClose?.()
         }
+        
         return () => <>
         <div class={s.mask} onClick={close}></div>
           <div class={s.overlay}>
