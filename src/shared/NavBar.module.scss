@@ -1,8 +1,18 @@
 .navbar{
 display: flex;
+background-image: linear-gradient(to bottom,#5c33be 0%,#8c4bd6 100%);
+color: var(--navbar-text);
+font-size: 24px;
+align-items: center;
+justify-content: start;
+padding: 40px 16px 12px;
     &_wrapper{
         width: 100%;
         height: 20%;
-        background-color: var(--button-bg);
+        fill: white;
+
     }
+}
+.title_wrapper{
+    margin-left: 12px;
 }

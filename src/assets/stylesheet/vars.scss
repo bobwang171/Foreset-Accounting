@@ -1,4 +1,5 @@
 :root {
+  
     --welcome-card-bg: white;
     --welcome-text: white;
     --button-bg: #5b33be;
@@ -6,5 +7,7 @@
     --button-font-size:18px;
     --button-radius:8px;
     --button-height:48px;
-    
+    --navbar-text:white;
+    --z-index-overlay:16;
+    --overlay-safe-height:24px;
   }
