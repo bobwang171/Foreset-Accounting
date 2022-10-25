@@ -19,7 +19,7 @@ export const Overlay = defineComponent({
           <div class={s.overlay}>
             <section class={s.title}>
                 <h2>未登录用户</h2>
-                <p>点击这里登陆</p>
+                <p>点击这里登录</p>
             </section>
             <nav class={s.main}>
                 <ul >

@@ -5,6 +5,9 @@ import { Third } from "../components/Welcome/Third";
 import { Forth } from "../components/Welcome/Forth";
 import { Welcome } from "../views/Welcome";
 import { StartPage } from '../components/Welcome/StartPage';
+import { ItemPage } from '../views/ItemPage';
+import { ItemList } from '../components/Item/ItemList';
+import { ItemCreate } from '../components/Item/ItemCreate';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -20,5 +23,12 @@ export const routes: RouteRecordRaw[] = [
             { path: '4', component: Forth,}
         ]
     },
-    {path:"/start", component: StartPage}
+    { path: "/start", component: StartPage },
+    {
+        path: "/item", component: ItemPage,
+        children: [
+            { path: "", component: ItemList },
+            {path:"create",component:ItemCreate},
+        ]
+    }
   ]
