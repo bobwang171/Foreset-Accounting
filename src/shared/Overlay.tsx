@@ -17,11 +17,11 @@ export const Overlay = defineComponent({
         return () => <>
         <div class={s.mask} onClick={close}></div>
           <div class={s.overlay}>
-            <section>
+            <section class={s.title}>
                 <h2>未登录用户</h2>
                 <p>点击这里登陆</p>
             </section>
-            <nav>
+            <nav class={s.main}>
                 <ul >
                     <li>
                         <Icon name='statistics'></Icon>
