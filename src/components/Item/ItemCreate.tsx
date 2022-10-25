@@ -5,13 +5,13 @@ import s from './ItemCreate.module.scss'
 export const ItemCreate = defineComponent({
   setup: (props, context) => {
     return () => (
-      <MainLayout>{
+      <MainLayout class={s.navbar}>{
         {
               title: () => "记一笔",
               icon: () => <Icon name='return' class={s.navIcon} />,
               default: () =>
                 <>
-                  
+                  aaa
               </>
             }
           }</MainLayout>
