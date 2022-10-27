@@ -27,7 +27,8 @@ export const Tabs = defineComponent({
               onClick={()=>props.onUpdateSelected?.(item.props?.name)}
             >
               {item.props?.name}</li>)}
-          </ol>
+        </ol>
+        {array.find((item)=>item.props?.name===props.selected)}
       </div>
     }
 

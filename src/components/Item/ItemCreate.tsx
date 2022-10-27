@@ -17,7 +17,7 @@ export const ItemCreate = defineComponent({
                     Icon列表1
                   </Tab>
                   <Tab name="收入">
-                    Icon列表2
+                  <div>Icon列表2</div> 
                   </Tab>
                 </Tabs>
               
