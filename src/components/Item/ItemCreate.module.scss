@@ -1,4 +1,16 @@
    .navIcon{
         width: 36px;
         height: 36px;
+        position: relative;
 }
+.numberPad{
+        position: fixed;
+        bottom:0
+}
+
+.numberPad_wrapper{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }

@@ -3,6 +3,7 @@ import { MainLayout } from '../../layouts/MainLayout';
 import { Icon } from '../../shared/icon';
 import { Tab, Tabs } from '../../shared/Tabs';
 import s from './ItemCreate.module.scss'
+import { NumberPad } from '../../shared/NumberPad';
 export const ItemCreate = defineComponent({
   setup: (props, context) => {
     const refKind = ref("支出")
@@ -11,7 +12,7 @@ export const ItemCreate = defineComponent({
         {
               title: () => "记一笔",
               icon: () => <Icon name='return' class={s.navIcon} />,
-              default: () =>
+              default: () =><>
                 <Tabs selected={refKind.value} onUpdateSelected={(name:string)=>refKind.value=name}>
                   <Tab name="支出">
                     Icon列表1
@@ -20,7 +21,10 @@ export const ItemCreate = defineComponent({
                   <div>Icon列表2</div> 
                   </Tab>
                 </Tabs>
-              
+                <div class={s.numberPad_wrapper}>
+                  <NumberPad></NumberPad>
+                </div>
+                </>
             }
           }</MainLayout>
     )
