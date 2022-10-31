@@ -1,8 +1,8 @@
 import { defineComponent, PropType,ref } from 'vue';
 import { Icon, IconName } from './icon';
 import { DatetimePicker, Popup } from 'vant'
-import dayjs from 'dayjs';
 import s from './NumberPad.module.scss'
+import dayjs from 'dayjs';
 export const NumberPad = defineComponent({
     setup: (props, context) => {
         const now = new Date()
@@ -37,7 +37,7 @@ export const NumberPad = defineComponent({
                 <div class={s.dateAndAmount}>
                     <span class={s.date}>
                         <Icon name='notes' class={s.icon}></Icon>
-                    <span>
+                        <span>
                         <span onClick={showDatePicker}>{dayjs(refDate.value).format()}</span>
                             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
                                 <DatetimePicker value={refDate.value} type="date" title="选择年月日"
