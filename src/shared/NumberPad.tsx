@@ -1,8 +1,13 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType,ref } from 'vue';
 import { Icon, IconName } from './icon';
+import { DatetimePicker, Popup } from 'vant'
+import dayjs from 'dayjs';
 import s from './NumberPad.module.scss'
 export const NumberPad = defineComponent({
     setup: (props, context) => {
+        const now = new Date()
+        const refDate = ref<Date>(now)
+        
         const buttons = [
             { text: "1", onClick: () => { } },
             { text: "2", onClick: () => { } },
@@ -22,12 +27,23 @@ export const NumberPad = defineComponent({
             { text: "提交", onClick: () => { } },
             
         ]
+        const refDatePickerVisible = ref(false)
+        const showDatePicker = () => refDatePickerVisible.value = true
+        const hideDatePicker = () => refDatePickerVisible.value = false
+        const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
+        const refAmount = ref('0')
         return () => (
             <>
                 <div class={s.dateAndAmount}>
                     <span class={s.date}>
                         <Icon name='notes' class={s.icon}></Icon>
-                        <span>2022-01-01</span>
+                    <span>
+                        <span onClick={showDatePicker}>{dayjs(refDate.value).format()}</span>
+                            <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
+                                <DatetimePicker value={refDate.value} type="date" title="选择年月日"
+                                onConfirm={setDate} onCancel={hideDatePicker}/>
+                            </Popup>
+                        </span>
                     </span>
                     <span class={s.amount}>199.12</span>  
                 </div>
