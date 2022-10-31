@@ -24,12 +24,12 @@ export const NumberPad = defineComponent({
         ]
         return () => (
             <>
-                <div>
-                    <span class={s.notes}>
-                        <Icon name='notes'></Icon>
+                <div class={s.dateAndAmount}>
+                    <span class={s.date}>
+                        <Icon name='notes' class={s.icon}></Icon>
                         <span>2022-01-01</span>
                     </span>
-                    <span class={s.amount}>数字</span>  
+                    <span class={s.amount}>199.12</span>  
                 </div>
 
                 <div class={s.buttons}>
