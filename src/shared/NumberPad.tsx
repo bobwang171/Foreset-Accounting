@@ -15,18 +15,24 @@ export const NumberPad = defineComponent({
                 if (dotIndex >= 0) { // 已经有小数点了
                   return
                 }
-              } else if (nString === '0') {
-                if (dotIndex === -1) { // 没有小数点
-                  if (refAmount.value === '0') { // 没小数点，但是有0
-                    return
-                  }
-                }
-              } else {
+            }
+            else if (nString === "0") {
+              if (refAmount.value === '0')
+                return
+          }
+            else {
                 if (refAmount.value === '0') {
                   refAmount.value = ''
                 }
-              }
-              refAmount.value += n.toString()
+          }
+          if (refAmount.value.length > 13) {
+            return
+          }
+          if (dotIndex>=0&& refAmount.value.length - dotIndex > 2) {
+            return
+          }
+          refAmount.value += n.toString()
+
         }
         const minDate = new Date(2020, 0, 1)
         const maxDate = new Date(2030,11,31)
