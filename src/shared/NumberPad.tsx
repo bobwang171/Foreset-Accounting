@@ -8,7 +8,26 @@ export const NumberPad = defineComponent({
         const now = new Date()
         const refDate = ref<Date>(now) 
         const refAmount = ref("")
-        const appendText=(n:string|number)=>refAmount.value+=n.toString()
+        const appendText = (n: string | number) => {
+            const nString = n.toString()
+            const dotIndex = refAmount.value.indexOf(".")
+            if (nString === '.') {
+                if (dotIndex >= 0) { // 已经有小数点了
+                  return
+                }
+              } else if (nString === '0') {
+                if (dotIndex === -1) { // 没有小数点
+                  if (refAmount.value === '0') { // 没小数点，但是有0
+                    return
+                  }
+                }
+              } else {
+                if (refAmount.value === '0') {
+                  refAmount.value = ''
+                }
+              }
+              refAmount.value += n.toString()
+        }
         const minDate = new Date(2020, 0, 1)
         const maxDate = new Date(2030,11,31)
         
