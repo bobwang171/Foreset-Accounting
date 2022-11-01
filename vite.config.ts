@@ -1,21 +1,28 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { VantResolve, createStyleImportPlugin } from 'vite-plugin-style-import';
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // @ts-nocheck
-import styleImport, { VantResolve } from 'vite-plugin-style-import';
-
 import { svgstore } from './src/vite_plugins/svgstore';
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),
-    styleImport({
-      resolves: [VantResolve()],
-    }),
-    svgstore(),
+  plugins: [
+    vue(),
     vueJsx({
       transformOn: true,
-      mergeProps:true,
-    // options are passed on to @vue/babel-plugin-jsx
-  })]
-
+      mergeProps: true,
+      // options are passed on to @vue/babel-plugin-jsx
+    }),
+    svgstore(),
+    createStyleImportPlugin({
+      resolves: [VantResolve()],
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: name => `../es/${name}/style`
+        }
+      ]
+    }),
+  ]
 })

@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@vitejs/plugin-vue': ^2.3.0
   '@vitejs/plugin-vue-jsx': ^2.0.1
+  consola: ^2.15.3
   dayjs: ^1.11.6
   sass: ^1.55.0
   svgo: ^2.8.0
@@ -11,12 +12,13 @@ specifiers:
   unplugin-vue-components: ^0.22.9
   vant: ^3.6.4
   vite: ^3.1.7
-  vite-plugin-style-import: 1.4.1
+  vite-plugin-style-import: '2'
   vue: ^3.2.25
   vue-router: '4'
   vue-tsc: ^1.0.3
 
 dependencies:
+  consola: registry.npmmirror.com/consola/2.15.3
   dayjs: registry.npmmirror.com/dayjs/1.11.6
   sass: registry.npmmirror.com/sass/1.55.0
   svgo: registry.npmmirror.com/svgo/2.8.0
@@ -31,7 +33,7 @@ devDependencies:
   typescript: registry.npmmirror.com/typescript/4.8.4
   unplugin-vue-components: registry.npmmirror.com/unplugin-vue-components/0.22.9_vue@3.2.40
   vite: registry.npmmirror.com/vite/3.1.7_sass@1.55.0
-  vite-plugin-style-import: registry.npmmirror.com/vite-plugin-style-import/1.4.1_vite@3.1.7
+  vite-plugin-style-import: registry.npmmirror.com/vite-plugin-style-import/2.0.0_vite@3.1.7
   vue-tsc: registry.npmmirror.com/vue-tsc/1.0.3_typescript@4.8.4
 
 packages:
@@ -974,6 +976,18 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
+  registry.npmmirror.com/consola/2.15.3:
+    resolution: {integrity: sha512-9vAdYbHj6x2fLKC4+oPH0kFzY/orMZyG2Aj+kNylHxKGJ/Ed4dpNyAQYwJOdqO4zdM7XpVHmyejQDcQHrnuXbw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/consola/-/consola-2.15.3.tgz}
+    name: consola
+    version: 2.15.3
+    dev: false
+
+  registry.npmmirror.com/console/0.7.2:
+    resolution: {integrity: sha512-+JSDwGunA4MTEgAV/4VBKwUHonP8CzJ/6GIuwPi6acKFqFfHUdSGCm89ZxZ5FfGWdZfkdgAroy5bJ5FSeN/t4g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/console/-/console-0.7.2.tgz}
+    name: console
+    version: 0.7.2
+    dev: true
+
   registry.npmmirror.com/constant-case/3.0.4:
     resolution: {integrity: sha512-I2hSBi7Vvs7BEuJDr5dDHfzb/Ruj3FyvFyh7KLilAjNQw3Be+xgqUBA2W6scVEcL0hL1dwPRtIqEPVUCKkSsyQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/constant-case/-/constant-case-3.0.4.tgz}
     name: constant-case
@@ -1756,6 +1770,12 @@ packages:
     version: 1.0.7
     dev: true
 
+  registry.npmmirror.com/pathe/0.2.0:
+    resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pathe/-/pathe-0.2.0.tgz}
+    name: pathe
+    version: 0.2.0
+    dev: true
+
   registry.npmmirror.com/picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/picocolors/-/picocolors-1.0.0.tgz}
     name: picocolors
@@ -2053,23 +2073,22 @@ packages:
       vue: registry.npmmirror.com/vue/3.2.40
     dev: false
 
-  registry.npmmirror.com/vite-plugin-style-import/1.4.1_vite@3.1.7:
-    resolution: {integrity: sha512-lJCRvm7+So0hHdnSJiJPg9gD5mxtL6YY0jmhEph+k7ArpsyvqOh6han2kG5htbWWDZxHkUN9d1BuTFL//yCLLQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-style-import/-/vite-plugin-style-import-1.4.1.tgz}
-    id: registry.npmmirror.com/vite-plugin-style-import/1.4.1
+  registry.npmmirror.com/vite-plugin-style-import/2.0.0_vite@3.1.7:
+    resolution: {integrity: sha512-qtoHQae5dSUQPo/rYz/8p190VU5y19rtBaeV7ryLa/AYAU/e9CG89NrN/3+k7MR8mJy/GPIu91iJ3zk9foUOSA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vite-plugin-style-import/-/vite-plugin-style-import-2.0.0.tgz}
+    id: registry.npmmirror.com/vite-plugin-style-import/2.0.0
     name: vite-plugin-style-import
-    version: 1.4.1
+    version: 2.0.0
     peerDependencies:
       vite: '>=2.0.0'
     dependencies:
       '@rollup/pluginutils': registry.npmmirror.com/@rollup/pluginutils/4.2.1
       change-case: registry.npmmirror.com/change-case/4.1.2
-      debug: registry.npmmirror.com/debug/4.3.4
+      console: registry.npmmirror.com/console/0.7.2
       es-module-lexer: registry.npmmirror.com/es-module-lexer/0.9.3
       fs-extra: registry.npmmirror.com/fs-extra/10.1.0
       magic-string: registry.npmmirror.com/magic-string/0.25.9
+      pathe: registry.npmmirror.com/pathe/0.2.0
       vite: registry.npmmirror.com/vite/3.1.7_sass@1.55.0
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   registry.npmmirror.com/vite/3.1.7_sass@1.55.0:

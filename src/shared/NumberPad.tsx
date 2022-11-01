@@ -6,7 +6,9 @@ import dayjs from 'dayjs';
 export const NumberPad = defineComponent({
     setup: (props, context) => {
         const now = new Date()
-        const refDate = ref<Date>(now)
+        const refDate = ref<Date>(now) 
+        const minDate = new Date(2020, 0, 1)
+        const maxDate = new Date(2030,11,31)
         
         const buttons = [
             { text: "1", onClick: () => { } },
@@ -31,17 +33,16 @@ export const NumberPad = defineComponent({
         const showDatePicker = () => refDatePickerVisible.value = true
         const hideDatePicker = () => refDatePickerVisible.value = false
         const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
-        const refAmount = ref('0')
         return () => (
             <>
                 <div class={s.dateAndAmount}>
                     <span class={s.date}>
                         <Icon name='notes' class={s.icon}></Icon>
                         <span>
-                        <span onClick={showDatePicker}>{dayjs(refDate.value).format()}</span>
+                        <span onClick={showDatePicker}>{dayjs(refDate.value).format('YYYY/MM/DD')}</span>
                             <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-                                <DatetimePicker value={refDate.value} type="date" title="选择年月日"
-                                onConfirm={setDate} onCancel={hideDatePicker}/>
+                                <DatetimePicker value={refDate.value} type="date" title="选择年月日" min-date={minDate} max-date={maxDate}
+                                    onConfirm={setDate} onCancel={hideDatePicker} />
                             </Popup>
                         </span>
                     </span>
