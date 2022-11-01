@@ -11,29 +11,29 @@
   .formLabel {
   }
   .formItem {
-    min-height: var(--input-min-height);
+    min-height: 48px;
     max-width: 100%;
     &.input {
       flex-grow: 1;
-      border: 1px solid var(--input-border-color);
-      border-radius: var(--input-radius);
+      border: 1px solid #5c33be;
+      border-radius: 8px;
       font-size: 18px;
       font-family: inherit;
       padding-left: 16px;
       padding-right: 16px;
-      box-shadow: inset 0 0 3px var(--input-shadow);
+      box-shadow: inset 0 0 3px rgba(0,0,0,0.25);
       &.error {
-        border-color: var(--error-color);
+        border-color: #E10505;
       }
     }
     &.emojiList {
       flex-grow: 1;
-      border: 1px solid var(--input-border-color);
-      border-radius: var(--input-radius);
+      border: 1px solid #5c33be;
+      border-radius: 8px;
       font-size: 18px;
       font-size: 14px;
       &.error {
-        border-color: var(--error-color);
+        border-color: #E10505;
       }
       > nav {
         display: flex;
@@ -47,9 +47,9 @@
           flex-shrink: 0;
           display: inline-block;
           padding: 8px;
-          color: var(--emoji-nav-text);
+          color: #999;
           &.selected {
-            color: var(--emoji-nav-text-selected);
+            color: #333;
           }
         }
       }
@@ -80,7 +80,7 @@
     }
     &_errorHint {
       margin-top: 4px;
-      color: var(--error-color);
+      color: #E10505;
       font-size: 12px;
     }
   }
