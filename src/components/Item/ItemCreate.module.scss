@@ -19,21 +19,16 @@
     }
     .tab{
         display: flex;
-
-        margin: 30px;
-        width: 60px;
-        height: 60px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin: 2vw;
    .content{
-
-        margin-right: 30px;
-
-
-        .sign_wrapper{
-
+        border: 1px solid red;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
-
+        margin: 4vw;
+        .sign_wrapper{
         .sign{
         >svg{
         width: 48px;

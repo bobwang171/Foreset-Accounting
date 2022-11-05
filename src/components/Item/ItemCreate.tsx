@@ -10,14 +10,14 @@ export const ItemCreate = defineComponent({
     const refExpenses = ref([
       { id: 1, name: "餐饮", sign: <Icon name='meal'/>, category: "expense" },
       { id: 2, name: "服装", sign: <Icon name='clothing'/>, category: "expense" },
-      { id: 3, name: "水电煤", sign: <Icon name='living'/>, category: "expense" },
-      { id: 4, name: "其他消费", sign: <Icon name='income'/>, category: "expense" },
+      { id: 3, name: "水电", sign: <Icon name='living'/>, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income'/>, category: "expense" },
     ])
     const refIncome = ref([
       { id: 1, name: "工资", sign: <Icon name='salary'/>, category: "income" },
       { id: 2, name: "储蓄", sign: <Icon name='saving'/>, category: "income" },
       { id: 3, name: "基金", sign: <Icon name='fund'/>, category: "income" },
-      { id: 4, name: "其他收入", sign: <Icon name='income'/>, category: "income" },
+      { id: 4, name: "其他", sign: <Icon name='income'/>, category: "income" },
     ])
     return () => (
       <MainLayout class={s.navbar}>{
