@@ -19,6 +19,8 @@
     }
     .tab{
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-wrap: wrap;
         flex-direction: row;
         margin: 2vw;

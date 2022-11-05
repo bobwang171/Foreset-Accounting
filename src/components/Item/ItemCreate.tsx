@@ -11,7 +11,9 @@ export const ItemCreate = defineComponent({
       { id: 1, name: "餐饮", sign: <Icon name='meal'/>, category: "expense" },
       { id: 2, name: "服装", sign: <Icon name='clothing'/>, category: "expense" },
       { id: 3, name: "水电", sign: <Icon name='living'/>, category: "expense" },
-      { id: 4, name: "其他", sign: <Icon name='income'/>, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+
+      
     ])
     const refIncome = ref([
       { id: 1, name: "工资", sign: <Icon name='salary'/>, category: "income" },
@@ -27,6 +29,13 @@ export const ItemCreate = defineComponent({
               default: () =><>
                 <Tabs selected={refKind.value} onUpdateSelected={(name:string)=>refKind.value=name}>
                   <Tab name="支出" class={s.tab}>
+                    <div class={s.content}>
+                    <div class={s.sign_wrapper}>
+                        <div class={s.sign}><Icon name='addTag' /></div>
+                    </div>
+                        <div class={s.name}>新增 </div>
+                      </div>
+
                     {refExpenses.value.map((data) =>
                       <div class={s.content}>
                         <div class={s.sign_wrapper}>
