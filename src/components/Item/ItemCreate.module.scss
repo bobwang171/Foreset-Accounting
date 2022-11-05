@@ -1,3 +1,6 @@
+   *{
+        box-sizing: border-box;
+   }
    .navIcon{
         width: 36px;
         height: 36px;
@@ -13,4 +16,35 @@
         left: 0;
         bottom: 0;
         width: 100%;
+    }
+    .tab{
+        display: flex;
+
+        margin: 30px;
+        width: 60px;
+        height: 60px;
+   .content{
+
+        margin-right: 30px;
+
+
+        .sign_wrapper{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .sign{
+        >svg{
+        width: 48px;
+        height: 48px;
+        }  
+        }
+        .name_wrapper{
+        display: flex;
+        font-size: 100px;
+        }
+       
+   }
+}
     }
