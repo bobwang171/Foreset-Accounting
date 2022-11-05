@@ -40,13 +40,17 @@ export const ItemCreate = defineComponent({
                     }
                   </Tab>
                   <Tab name="收入" class={s.tab}>
-                    <div class={s.content}>
-                      <div class={s.sign_wrapper}>
-                        {refIncome.value.map((data) => <div class={s.sign}>{data.name}</div>)}
+                  {refIncome.value.map((data) =>
+                      <div class={s.content}>
+                        <div class={s.sign_wrapper}>
+                        <div class={s.sign}>{data.sign}</div>
+                        </div>
+                        <div class={s.name_wrapper}>
+                        <div class={s.name}>{data.name}</div>
+                        </div>
                       </div>
-                      <div class={s.name}></div>
-                      {refExpenses.value.map((data) => <div class={s.sign}>{data.sign}</div>)}
-                      </div>
+                    )
+                    }
                   </Tab>
                 </Tabs>
                 <div class={s.numberPad_wrapper}>
