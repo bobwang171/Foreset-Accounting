@@ -6,4 +6,11 @@
     font-size: var(--button-font-size);
     border-radius: var(--button-radius);
     height:var(--button-height);
+    &.important{
+
+    }
+    &.normal{}
+    &.danger{
+        background: #E10501;
+    }
 }
