@@ -1,17 +1,20 @@
-.numberPad_wrapper{
+.numberPad{
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    left: 0;
     bottom: 0;
     width: 100%;
-    border: 1px solid red;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 .dateAndAmount{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
     padding: 16px;
     font-family: monospace;
     border-top: 1px solid #ddd;
+    background: white;
     }
     .amount{
         font-size: 20px;
@@ -91,4 +94,3 @@
 
     }
 }
-

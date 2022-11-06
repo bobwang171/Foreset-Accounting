@@ -12,6 +12,26 @@ export const ItemCreate = defineComponent({
       { id: 2, name: "服装", sign: <Icon name='clothing'/>, category: "expense" },
       { id: 3, name: "水电", sign: <Icon name='living'/>, category: "expense" },
       { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
+      { id: 4, name: "其他", sign: <Icon name='income' />, category: "expense" },
 
       
     ])
@@ -26,7 +46,8 @@ export const ItemCreate = defineComponent({
         {
               title: () => "记一笔",
               icon: () => <Icon name='return' class={s.navIcon} />,
-              default: () =><>
+          default: () => <>
+            <div class={s.wrapper}>
                 <Tabs selected={refKind.value} onUpdateSelected={(name:string)=>refKind.value=name}>
                   <Tab name="支出" class={s.tab}>
                     <div class={s.content}>
@@ -61,13 +82,13 @@ export const ItemCreate = defineComponent({
                     )
                     }
                   </Tab>
-                </Tabs>
-                <div class={s.numberPad_wrapper}>
-                  <NumberPad></NumberPad>
-                </div>
+              </Tabs>
+              <NumberPad class={s.numberPad_wrapper}></NumberPad>
+              </div>
                 </>
             }
           }</MainLayout>
     )
+    
   }
 })

@@ -1,31 +1,44 @@
-   *{
-        box-sizing: border-box;
-   }
+.navbar{
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        height: 10vw;
+        width: 100%;
+}
+.wrapper{
+        display: flex;
+        flex-direction: column;
+        height:100px;
+        width: 100%;
+
+   }   
    .navIcon{
         width: 36px;
         height: 36px;
         position: relative;
-}
-.numberPad{
-        position: fixed;
-        bottom:0
+        flex-grow: 0;
+        flex-shrink: 0;
 }
 
 .numberPad_wrapper{
+        display: flex;
         position: fixed;
-        left: 0;
         bottom: 0;
-        width: 100%;
+        flex-direction: column;
+        flex-shrink: 0;
+        flex-grow: 0;
     }
     .tab{
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
+        width: 100%;
         flex-direction: row;
-        margin: 2vw;
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: auto;
    .content{
-        border: 1px solid red;
         display: flex;
         flex-direction: column;
         align-items: center;

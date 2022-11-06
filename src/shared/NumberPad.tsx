@@ -58,9 +58,10 @@ export const NumberPad = defineComponent({
         const hideDatePicker = () => refDatePickerVisible.value = false
         const setDate = (date: Date) => { refDate.value = date; hideDatePicker() }
         return () => (
-            <>
+          <>
+            <div class={s.numberPad}>
                 <div class={s.dateAndAmount}>
-                    <span class={s.date}>
+                    <div class={s.date}>
                         <Icon name='notes' class={s.icon}></Icon>
                         <span>
                         <span onClick={showDatePicker}>{dayjs(refDate.value).format('YYYY/MM/DD')}</span>
@@ -69,7 +70,7 @@ export const NumberPad = defineComponent({
                                     onConfirm={setDate} onCancel={hideDatePicker} />
                             </Popup>
                         </span>
-                    </span>
+                    </div>
                     <span class={s.amount}>{refAmount.value}</span>  
                 </div>
 
@@ -78,7 +79,8 @@ export const NumberPad = defineComponent({
                     <button onClick={button.onClick}>{button.text}
                     </button>)}
 
-                </div>
+              </div>
+              </div>
         </>
     )
   }
