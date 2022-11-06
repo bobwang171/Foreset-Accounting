@@ -1,7 +1,7 @@
 .navbar{
         display: flex;
         flex-direction: column;
-        position: fixed;
+        position: sticky;
         height: 10vw;
         width: 100%;
 }
@@ -10,7 +10,7 @@
         flex-direction: column;
         height:100px;
         width: 100%;
-
+        position: relative;
    }   
    .navIcon{
         width: 36px;
@@ -37,7 +37,7 @@
         flex-direction: row;
         flex-grow: 1;
         flex-shrink: 1;
-        overflow: auto;
+        overflow: scroll;
    .content{
         display: flex;
         flex-direction: column;
