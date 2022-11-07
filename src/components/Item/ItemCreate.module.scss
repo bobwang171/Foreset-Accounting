@@ -8,9 +8,10 @@
 .wrapper{
         display: flex;
         flex-direction: column;
-        height:100px;
         width: 100%;
+        height: 100vh;
         position: relative;
+        overflow: hidden;
    }   
    .navIcon{
         width: 36px;
@@ -20,13 +21,18 @@
         flex-shrink: 0;
 }
 
+.tabs-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
 .numberPad_wrapper{
         display: flex;
-        position: fixed;
         bottom: 0;
         flex-direction: column;
         flex-shrink: 0;
-        flex-grow: 0;
     }
     .tab{
         display: flex;
