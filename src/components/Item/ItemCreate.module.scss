@@ -1,10 +1,6 @@
-.navbar{
-        display: flex;
-        flex-direction: column;
-        position: sticky;
-        height: 10vw;
-        width: 100%;
-}
+
+
+
 .wrapper{
         display: flex;
         flex-direction: column;
@@ -21,7 +17,7 @@
         flex-shrink: 0;
 }
 
-.tabs-wrapper {
+.tabs_wrapper {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -43,7 +39,7 @@
         flex-direction: row;
         flex-grow: 1;
         flex-shrink: 1;
-        overflow: scroll;
+        overflow: auto;
    .content{
         display: flex;
         flex-direction: column;

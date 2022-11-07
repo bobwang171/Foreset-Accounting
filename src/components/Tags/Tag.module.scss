@@ -11,10 +11,8 @@ button{
   .formRow {
     margin-top: 8px;
   }
-  .formLabel {
-  }
   .formItem {
-    min-height: 48px;
+    min-height: 18px;
     max-width: 100%;
     &.input {
       flex-grow: 1;

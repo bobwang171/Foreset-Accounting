@@ -47,7 +47,7 @@ export const ItemCreate = defineComponent({
           title: () => "记一笔",
           icon: () => <Icon name='return' class={s.navIcon} />,
           default: () => <>
-              <Tabs class={s['tabs-wrapper']} selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
+              <Tabs class={s.tabs_wrapper} selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
                 <Tab name="支出" class={s.tab}>
                   <div class={s.content}>
                     <div class={s.sign_wrapper}>
