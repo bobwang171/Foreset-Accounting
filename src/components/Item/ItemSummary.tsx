@@ -1,7 +1,8 @@
 import { defineComponent, PropType } from 'vue';
 import { FloatButton } from '../../shared/FloatButton';
 import s from './ItemSummary.module.scss'
-import { ItemComponent } from './ItemConponent';
+import { ItemComponent } from './ItemComponent';
+import { Form, FormItem } from '../../shared/Form';
 export const ItemSummary = defineComponent({
     props: {
         startDate: {
@@ -36,7 +37,9 @@ export const ItemSummary = defineComponent({
             <ItemComponent />
             <ItemComponent />
           </div>
-
+          <Form>
+            <FormItem label='时间' type='date'></FormItem>
+          </Form>
           <FloatButton iconName='add' />
         </div>
       </>

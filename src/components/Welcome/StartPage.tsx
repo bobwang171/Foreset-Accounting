@@ -52,10 +52,6 @@ export const StartPage = defineComponent({
 
 
 
-                        // title: () => "山竹记账",
-                        // icon: () => 
-                        // default: () => <></>
-
 
 
 
