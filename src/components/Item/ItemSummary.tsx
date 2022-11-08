@@ -38,7 +38,6 @@ export const ItemSummary = defineComponent({
             <ItemComponent />
           </div>
           <Form>
-            <FormItem label='时间' type='date'></FormItem>
           </Form>
           <FloatButton iconName='add' />
         </div>

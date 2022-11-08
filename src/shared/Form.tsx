@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, modelValue, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { EmojiSelect } from './EmojiSelect';
 import s from '../components/Tags/Tag.module.scss';
 import { DatetimePicker, Popup } from 'vant';
@@ -56,8 +56,12 @@ export const FormItem = defineComponent({
           return <><input readonly={true} value={props.modelValue} class={[s.formItem, s.emojiList, s.error]}
             onClick={() => { refDateVisible.value = true }} />
             <Popup position='bottom' v-model:show={refDateVisible.value}>
-            <DatetimePicker value={props.modelValue} type="date" title="选择年月日" 
-                onConfirm={(date:Date)=>{context.emit("update:modelValue",dayjs(date).format())}} onCancel={refDateVisible.value=false} />
+            <DatetimePicker value={props.modelValue} type="date" title="选择年月日" min-date={new Date(2020, 0, 1)} max-date={new Date(2030, 11, 31)}
+                onConfirm={(date: Date) => {
+                  context.emit("update:modelValue", dayjs(date).format("YYYY-MM-DD") ),
+                  refDateVisible.value=false
+                }} 
+                onCancel={() => { refDateVisible.value = false }} />
               </Popup></>
         case undefined:
           return context.slots.default?.()

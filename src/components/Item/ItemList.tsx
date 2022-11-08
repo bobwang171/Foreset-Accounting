@@ -48,16 +48,20 @@ export const ItemList = defineComponent({
                       <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                     </Tab>
                     <Tab name='自定义'>
-                      <Overlay show={refOverlayVisible.value}>
+                      <Overlay show={refOverlayVisible.value} >
                         <div class={s.wrapper}>
                         <div class={s.block}>
                           <header><span>请选择时间</span></header>
                           <Form>
                               <FormItem type='date' label='起始时间' v-model={customTime[0]} />
 
-                              <FormItem type='date' label='终止时间'v-model={customTime[1]}/>
-                              
-                          </Form>
+                              <FormItem type='date' label='终止时间' v-model={customTime[1]} />
+
+                            </Form>
+                            <div class={s.button_wrapper}>
+                              <button class={s.cancel}>取消</button>
+                              <button class={s.confirm}>确定</button>
+                            </div>
                         </div>
                         </div>
                       </Overlay>
