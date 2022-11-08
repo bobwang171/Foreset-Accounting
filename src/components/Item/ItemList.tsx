@@ -1,19 +1,21 @@
-import { defineComponent, PropType, ref, reactive } from 'vue';
+import { defineComponent, PropType, ref, reactive, watchEffect } from 'vue';
 import s from './ItemList.module.scss'
 import { MainLayout } from '../../layouts/MainLayout';
 import { Icon } from '../../shared/icon';
 import { Tabs, Tab } from '../../shared/Tabs';
 import { ItemSummary } from './ItemSummary';
 import dayjs from 'dayjs';
+import { Overlay } from 'vant';
+import { Form, FormItem } from '../../shared/Form';
 
 
 export const ItemList = defineComponent({
 
   setup: (props, context) => {
-    
+    const refOverlayVisible = ref(false);
     const refKind = ref("本月")
     const time = dayjs()
-    const custom=reactive([dayjs(),dayjs()])
+    const customTime=reactive([dayjs(),dayjs()])
     const timeList = [
       [time.startOf("month"), time.endOf("month")],
       [time.subtract(1, "month").startOf("month"), time.subtract(1, "month").endOf("month")],
@@ -21,6 +23,11 @@ export const ItemList = defineComponent({
       
       
     ]
+    watchEffect(() => {
+      if (refKind.value === "自定义") {
+        refOverlayVisible.value=true
+      }
+    })
     
     return () => (
         <MainLayout>
@@ -41,7 +48,19 @@ export const ItemList = defineComponent({
                       <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                     </Tab>
                     <Tab name='自定义'>
-                      <ItemSummary startDate={custom[0].format()} endDate={custom[1].format()}></ItemSummary>
+                      <Overlay show={refOverlayVisible.value}>
+                        <div class={s.wrapper}>
+                        <div class={s.block}>
+                          <header><span>请选择时间</span></header>
+                          <Form>
+                              <FormItem type='date' label='起始时间' v-model={customTime[0]} />
+
+                              <FormItem type='date' label='终止时间'v-model={customTime[1]}/>
+                              
+                          </Form>
+                        </div>
+                        </div>
+                      </Overlay>
                     </Tab>
                   </Tabs>
               </>

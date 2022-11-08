@@ -1,6 +1,8 @@
-import { computed, defineComponent, PropType, modelValue } from 'vue';
+import { computed, defineComponent, PropType, modelValue, ref } from 'vue';
 import { EmojiSelect } from './EmojiSelect';
 import s from '../components/Tags/Tag.module.scss';
+import { DatetimePicker, Popup } from 'vant';
+import dayjs from 'dayjs';
 export const Form = defineComponent({
   props: {
     onSubmit: {
@@ -32,6 +34,7 @@ export const FormItem = defineComponent({
     }
   },
   setup: (props, context) => {
+    const refDateVisible=ref(false)
     const content = computed(() => {
       switch (props.type) {
         case 'text':
@@ -50,7 +53,12 @@ export const FormItem = defineComponent({
             class={[s.formItem, s.emojiList, s.error]}
 />
         case 'date':
-          return <input />
+          return <><input readonly={true} value={props.modelValue} class={[s.formItem, s.emojiList, s.error]}
+            onClick={() => { refDateVisible.value = true }} />
+            <Popup position='bottom' v-model:show={refDateVisible.value}>
+            <DatetimePicker value={props.modelValue} type="date" title="选择年月日" 
+                onConfirm={(date:Date)=>{context.emit("update:modelValue",dayjs(date).format())}} onCancel={refDateVisible.value=false} />
+              </Popup></>
         case undefined:
           return context.slots.default?.()
       }

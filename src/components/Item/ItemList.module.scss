@@ -1,3 +1,32 @@
 .itemlist{
     
 }
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  .block {
+    width: 85vw;
+    height: 85vw;
+    background-color: #fff;
+    >header{
+        display: flex;
+        flex-direction: column;
+        >span{
+        background: #5C33BE;
+        height: 15vw;
+        width: 100%;
+        font-size: 18px;
+        color: #fff;
+        line-height:15vw;
+        text-align: center;
+        word-spacing: 0.6px;
+
+    }
+        
+    }
+  }
