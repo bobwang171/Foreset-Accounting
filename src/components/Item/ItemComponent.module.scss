@@ -1,0 +1,21 @@
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px ;
+    border-bottom:1px solid #EEEEEE;
+
+
+    .body{
+        display: flex;
+        flex-direction: column;
+
+        .date{
+            padding-top: 10px;
+            color: #999999;
+        }
+    }
+    .amount{
+        color:#53A867
+    }
+}
