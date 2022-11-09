@@ -17,67 +17,67 @@ export const ItemList = defineComponent({
     const refKind = ref("本月")
     const time = dayjs()
     const customTime = reactive([dayjs(), dayjs()])
-    const onSubmitCustomTime = (e:Event) => {
+    const onSubmitCustomTime = (e: Event) => {
       e.preventDefault()
-      refOverlayVisible.value=false
+      refOverlayVisible.value = false
     }
     const timeList = [
       [time.startOf("month"), time.endOf("month")],
       [time.subtract(1, "month").startOf("month"), time.subtract(1, "month").endOf("month")],
       [time.startOf("year"), time.endOf("year")]
-      
-      
+
+
     ]
     watchEffect(() => {
       if (refKind.value === "自定义") {
-        refOverlayVisible.value=true
+        refOverlayVisible.value = true
       }
     })
-    
+
     return () => (
-        <MainLayout>
+      <MainLayout>
+        {
           {
-            {
-              title: () => "山竹记账",
-              icon: () => <OverlayIcon/>,
-              default: () =>
-                <>
-                  <Tabs selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
-                    <Tab name='本月'>
-                      <ItemSummary startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
-                    </Tab>
-                    <Tab name='上月'>
-                      <ItemSummary startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} />
-                    </Tab>
-                    <Tab name='今年'>
-                      <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
-                    </Tab>
-                    <Tab name='自定义'>
+            title: () => "山竹记账",
+            icon: () => <OverlayIcon />,
+            default: () =>
+              <>
+                <Tabs selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
+                  <Tab name='本月'>
+                    <ItemSummary startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
+                  </Tab>
+                  <Tab name='上月'>
+                    <ItemSummary startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} />
+                  </Tab>
+                  <Tab name='今年'>
                     <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
-                      <Overlay show={refOverlayVisible.value} >
-                        <div class={s.wrapper}>
+                  </Tab>
+                  <Tab name='自定义'>
+                    <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
+                    <Overlay show={refOverlayVisible.value} onClick={() => { refOverlayVisible.value = false }} >
+                      <div class={s.wrapper}>
                         <div class={s.block}>
                           <header><span>请选择时间</span></header>
                           <Form onSubmit={onSubmitCustomTime}>
-                              <FormItem type='date' label='起始时间' v-model={customTime[0]} />
+                            <FormItem type='date' label='起始时间' v-model={customTime[0]} />
 
-                              <FormItem type='date' label='终止时间' v-model={customTime[1]} />
+                            <FormItem type='date' label='终止时间' v-model={customTime[1]} />
 
-                              <div class={s.button_wrapper}>
-                              <button class={s.cancel} type="button" onClick={()=>{refOverlayVisible.value=false}}>取消</button>
+                            <div class={s.button_wrapper}>
+                              <button class={s.cancel} type="button" onClick={() => { refOverlayVisible.value = false }}>取消</button>
                               <button class={s.confirm} type="submit">确定</button>
                             </div>
-                            </Form>
+                          </Form>
 
                         </div>
-                        </div>
-                      </Overlay>
-                    </Tab>
-                  </Tabs>
+                      </div>
+                    </Overlay>
+                  </Tab>
+                </Tabs>
               </>
-            }
           }
-        </MainLayout>
+        }
+      </MainLayout>
     )
   }
 })

@@ -1,33 +1,40 @@
-.wrapper{
+.wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .logo{
-    padding-top: 52px;
-        >svg{
-        width: 96px;
-        height: 96px;
+
+    .logo {
+        padding-top: 52px;
+
+        >svg {
+            width: 96px;
+            height: 96px;
         }
     }
-    .form{
+
+    .form {
         width: 100%;
-        .certificationCode_wrapper{
+
+        .certificationCode_wrapper {
             display: flex;
 
-        justify-content: start;
-        align-items: center;
-        padding-top: 3vw;
-            .certificationCode{
-                width: 30%;
+            justify-content: start;
+            align-items: center;
+            padding-top: 3vw;
+
+            .certificationCode {
+                width: 50%;
                 padding: 0 10px 10px 0;
             }
-            .certificationButton{
+
+            .certificationButton {
                 margin-left: 3vw;
             }
-            }
+        }
     }
-    .loginButton{
+
+    .loginButton {
         margin-top: 20vw;
     }
-    }
+}

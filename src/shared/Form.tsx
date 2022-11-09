@@ -31,10 +31,13 @@ export const FormItem = defineComponent({
     },
     error: {
       type: String
+    },
+    placeholder: {
+      type: String
     }
   },
   setup: (props, context) => {
-    const refDateVisible=ref(false)
+    const refDateVisible = ref(false)
     const content = computed(() => {
       switch (props.type) {
         case 'text':
@@ -42,27 +45,30 @@ export const FormItem = defineComponent({
             value={props.modelValue}
             onInput={(e: any) => context.emit('update:modelValue', e.target.value)
             }
+            placeholder={props.placeholder}
             class={[s.formItem, s.input, s.error]} />
         case 'emojiSelect':
           return <EmojiSelect
             modelValue={props.modelValue?.toString()}
             onModelValueUpdated={value => {
-              context.emit('update:modelValue', value)}
-              
+              context.emit('update:modelValue', value)
+            }
+
             }
             class={[s.formItem, s.emojiList, s.error]}
-/>
+          />
         case 'date':
           return <><input readonly={true} value={props.modelValue} class={[s.formItem, s.emojiList, s.error, s.input]}
-            onClick={() => { refDateVisible.value = true }} />
+            onClick={() => { refDateVisible.value = true }}
+            placeholder={props.placeholder} />
             <Popup position='bottom' v-model:show={refDateVisible.value}>
-            <DatetimePicker value={props.modelValue} type="date" title="选择年月日" min-date={new Date(2020, 0, 1)} max-date={new Date(2030, 11, 31)}
+              <DatetimePicker value={props.modelValue} type="date" title="选择年月日" min-date={new Date(2020, 0, 1)} max-date={new Date(2030, 11, 31)}
                 onConfirm={(date: Date) => {
-                  context.emit("update:modelValue", dayjs(date).format("YYYY-MM-DD") ),
-                  refDateVisible.value=false
-                }} 
+                  context.emit("update:modelValue", dayjs(date).format("YYYY-MM-DD")),
+                    refDateVisible.value = false
+                }}
                 onCancel={() => { refDateVisible.value = false }} />
-              </Popup></>
+            </Popup></>
         case undefined:
           return context.slots.default?.()
       }
