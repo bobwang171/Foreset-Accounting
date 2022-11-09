@@ -53,7 +53,7 @@ export const FormItem = defineComponent({
             class={[s.formItem, s.emojiList, s.error]}
 />
         case 'date':
-          return <><input readonly={true} value={props.modelValue} class={[s.formItem, s.emojiList, s.error]}
+          return <><input readonly={true} value={props.modelValue} class={[s.formItem, s.emojiList, s.error, s.input]}
             onClick={() => { refDateVisible.value = true }} />
             <Popup position='bottom' v-model:show={refDateVisible.value}>
             <DatetimePicker value={props.modelValue} type="date" title="选择年月日" min-date={new Date(2020, 0, 1)} max-date={new Date(2030, 11, 31)}

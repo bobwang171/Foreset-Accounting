@@ -9,7 +9,7 @@
 
   .block {
     width: 85vw;
-    height: 85vw;
+    height: 70vw;
     background-color: #fff;
     >header{
         display: flex;
@@ -31,7 +31,7 @@
     .button_wrapper{
         display: flex;
         justify-content: flex-end;
-        margin-top: 10vw;
+        margin-top: 6vw;
     >button{
         background-color: transparent;
         border: none;

@@ -15,7 +15,11 @@ export const ItemList = defineComponent({
     const refOverlayVisible = ref(false);
     const refKind = ref("本月")
     const time = dayjs()
-    const customTime=reactive([dayjs(),dayjs()])
+    const customTime = reactive([dayjs(), dayjs()])
+    const onSubmitCustomTime = (e:Event) => {
+      e.preventDefault()
+      refOverlayVisible.value=false
+    }
     const timeList = [
       [time.startOf("month"), time.endOf("month")],
       [time.subtract(1, "month").startOf("month"), time.subtract(1, "month").endOf("month")],
@@ -48,20 +52,22 @@ export const ItemList = defineComponent({
                       <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                     </Tab>
                     <Tab name='自定义'>
+                    <ItemSummary startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                       <Overlay show={refOverlayVisible.value} >
                         <div class={s.wrapper}>
                         <div class={s.block}>
                           <header><span>请选择时间</span></header>
-                          <Form>
+                          <Form onSubmit={onSubmitCustomTime}>
                               <FormItem type='date' label='起始时间' v-model={customTime[0]} />
 
                               <FormItem type='date' label='终止时间' v-model={customTime[1]} />
 
-                            </Form>
-                            <div class={s.button_wrapper}>
-                              <button class={s.cancel}>取消</button>
-                              <button class={s.confirm}>确定</button>
+                              <div class={s.button_wrapper}>
+                              <button class={s.cancel} type="button">取消</button>
+                              <button class={s.confirm} type="submit">确定</button>
                             </div>
+                            </Form>
+
                         </div>
                         </div>
                       </Overlay>
