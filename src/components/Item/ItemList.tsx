@@ -7,6 +7,7 @@ import { ItemSummary } from './ItemSummary';
 import dayjs from 'dayjs';
 import { Overlay } from 'vant';
 import { Form, FormItem } from '../../shared/Form';
+import { OverlayIcon } from '../../shared/Overlay';
 
 
 export const ItemList = defineComponent({
@@ -38,7 +39,7 @@ export const ItemList = defineComponent({
           {
             {
               title: () => "山竹记账",
-              icon: () => <Icon name='menu' class={s.navIcon} />,
+              icon: () => <OverlayIcon/>,
               default: () =>
                 <>
                   <Tabs selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
