@@ -1,0 +1,39 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .logo{
+    padding-top: 52px;
+        >svg{
+        width: 96px;
+        height: 96px;
+        }
+    }
+    .form{
+        width: 100%;
+        .certificationCode_wrapper{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: start;
+        align-items: flex-end;
+        padding-top: 3vw;
+            .certificationCode{
+                width: 30%;
+                padding: 0 10px 10px 0;
+            }
+            .certificationButton{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 35px;
+                margin-bottom: 10px;
+                margin-left: 10px;
+
+            }
+    }
+    .loginButton{
+        margin-top: 20vw;
+    }
+    }
+}
