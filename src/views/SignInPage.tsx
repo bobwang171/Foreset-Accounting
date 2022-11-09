@@ -1,11 +1,32 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, reactive } from 'vue';
 import { MainLayout } from '../layouts/MainLayout';
 import s from './SignInPage.module.scss'
 import { Icon } from '../shared/icon';
 import { Form, FormItem } from '../shared/Form';
 import { Button } from '../shared/Button';
+import { validate } from '../shared/Validate';
 export const SignIn = defineComponent({
-  setup: (props, context) => {
+    setup: (props, context) => {
+        const formData = reactive({
+            email: "",
+            code:""
+        })
+        const errors = reactive({
+            email: "",
+            code:""
+        })
+        
+        const onSubmit = (e: Event) => {
+            e.preventDefault()
+            Object.assign(errors, {
+                email:[],code:[]
+            })
+        const newErrors=validate(formData,[{ key: "email", type: "required", message: "必填" },
+            {key:"email", type:"pattern", regex:/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, message:"必须为邮箱地址"},
+            { key: "code", type: "required", message: "必填" }])
+            
+            Object.assign(errors,newErrors)
+        }
         return () => (
             <MainLayout>
                 {{
@@ -14,10 +35,10 @@ export const SignIn = defineComponent({
                     default: () => <>
                         <div class={s.wrapper}>
                             <div class={s.logo}><Icon name='mangosteen'/></div>
-                            <Form class={s.form}>
-                                <FormItem type='text' label='邮箱地址'></FormItem>
+                            <Form class={s.form} onSubmit={onSubmit}>
+                                <FormItem type='text' label='邮箱地址' v-model={formData.email} error={errors.email?.[0]??"　"}></FormItem>
                                 <div class={s.certificationCode_wrapper}>
-                                    <FormItem class={s.certificationCode} type='text' label='验证码'></FormItem>
+                                    <FormItem class={s.certificationCode} type='text' label='验证码' v-model={formData.code} error={errors.code?.[0]??"　"}></FormItem>
                                     <Button class={s.certificationButton}><span>发送验证码</span></Button>
                                 </div>
                                 <Button class={s.loginButton}>登录</Button>
