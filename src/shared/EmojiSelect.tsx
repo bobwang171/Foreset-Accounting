@@ -3,9 +3,12 @@ import { emojiList } from './EmojiList';
 import s from './EmojiSelect.module.scss'
 export const EmojiSelect = defineComponent({
   props: {
-    modelValue:{
+    modelValue: {
       type: String
-      
+
+    },
+    onModelValueUpdated: {
+      type: Function
     }
   },
   setup: (props, context) => {
@@ -31,25 +34,24 @@ export const EmojiSelect = defineComponent({
       ['运动', ['sport', 'game']],
     ]
     const onClickTab = (index: number) => {
-      refSelected.value=index
+      refSelected.value = index
     }
-    const onClickEmoji=(emoji:string)=>{context.emit("update:modelValue",emoji)}
+    const onClickEmoji = (emoji: string) => { context.emit("update:modelValue", emoji) }
     return () => (
-      
+
       <div class={s.emojiList}>
         <nav>
-          {table.map((nav,index) =>
-            <span class={index===refSelected.value?s.selected:""}
+          {table.map((nav, index) =>
+            <span class={index === refSelected.value ? s.selected : ""}
               onClick={() => onClickTab(index)}>{nav[0]}</span>)}
         </nav>
         <ol>
           {
-            
-            (table[refSelected.value][1] as Array <string>).map(item => {
-              const emojis = emojiList.find((category) => 
+
+            (table[refSelected.value][1] as Array<string>).map(item => {
+              const emojis = emojiList.find((category) =>
                 category[0] === item)
-              return emojis[1].map((emo) =>
-              { return <li onClick={()=>onClickEmoji(emo)}>{emo}</li>})
+              return emojis[1].map((emo) => { return <li onClick={() => onClickEmoji(emo)}>{emo}</li> })
             })
           }
         </ol>

@@ -72,7 +72,7 @@ export const TimeTabsLayout = defineComponent({
                                     <Tab name='自定义'>
                                         <props.component
                                             startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
-                                        <Overlay show={refOverlayVisible.value} onClick={() => { refOverlayVisible.value = false }} >
+                                        <Overlay show={refOverlayVisible.value} >
                                             <div class={s.wrapper}>
                                                 <div class={s.block}>
                                                     <header><span>请选择时间</span></header>
