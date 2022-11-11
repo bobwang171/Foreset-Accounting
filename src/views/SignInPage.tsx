@@ -27,6 +27,9 @@ export const SignIn = defineComponent({
 
             Object.assign(errors, newErrors)
         }
+        const onClickSendCertificationCode = () => {
+            console.log("11111")
+        }
         return () => (
             <MainLayout>
                 {{
@@ -39,7 +42,7 @@ export const SignIn = defineComponent({
                                 <FormItem type='text' label='邮箱地址' placeholder='请输入邮箱，然后点击发送验证码' v-model={formData.email} error={errors.email?.[0] ?? "　"}></FormItem>
                                 <div class={s.certificationCode_wrapper}>
                                     <FormItem class={s.certificationCode} type='text' label='验证码' placeholder='请输入六位数字' v-model={formData.code} error={errors.code?.[0] ?? "　"}></FormItem>
-                                    <Button class={s.certificationButton}><span>发送验证码</span></Button>
+                                    <Button class={s.certificationButton} onClick={onClickSendCertificationCode}><span>发送验证码</span></Button>
                                 </div>
                                 <Button class={s.loginButton}>登录</Button>
                             </Form>

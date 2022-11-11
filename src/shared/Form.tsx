@@ -38,6 +38,9 @@ export const FormItem = defineComponent({
     options: {
       type: Array as PropType<Array<{ value: string, text: string }>>
     },
+    onClick: {
+      type: Function as PropType<() => void>
+    }
   },
   setup: (props, context) => {
     const refDateVisible = ref(false)
@@ -49,6 +52,7 @@ export const FormItem = defineComponent({
             onInput={(e: any) => context.emit('update:modelValue', e.target.value)
             }
             placeholder={props.placeholder}
+            onClick={props.onClick}
             class={[s.formItem, s.input, s.error]} />
         case 'emojiSelect':
           return <EmojiSelect

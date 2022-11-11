@@ -1,21 +1,24 @@
-.wrapper{
+.wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px ;
-    border-bottom:1px solid #EEEEEE;
+    padding: 25px;
+    border-bottom: 1px solid #EEEEEE;
 
 
-    .body{
+    .body {
         display: flex;
         flex-direction: column;
 
-        .date{
+        .date {
             padding-top: 10px;
             color: #999999;
         }
     }
-    .amount{
-        color:#53A867
+
+    .amount {
+        color: #53A867;
+        text-align: right;
+
     }
 }

@@ -2,6 +2,66 @@
     padding: 16px;
 }
 
-.demo {
-    height: 500px;
+.lineChart {
+    height: 128px;
+    margin-top: 10px;
+}
+
+
+.pieChart {
+    height: 300px;
+    margin-top: 10px;
+}
+
+.barChart {
+    .wrapper {
+        display: flex;
+        border-bottom: 1px solid #EEEEEE;
+        height: 48px;
+        width: 100%;
+        align-items: center;
+
+        .icon {
+            width: 20%;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+        }
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            width: 80%;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            .nameAndAmount {
+                display: flex;
+                align-items: center;
+
+                .name {
+                    align-content: flex-start;
+                    margin-right: auto;
+                    color: #666;
+
+                }
+
+                .amount {
+                    color: #666;
+                    margin-left: auto;
+
+                }
+            }
+
+            .bar {
+                height: 8px;
+                width: 100%;
+                margin-top: 4px;
+                border-radius: 4px;
+                background: #EBA953;
+            }
+        }
+
+
+    }
 }
