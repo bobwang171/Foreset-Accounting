@@ -30,6 +30,11 @@
 
             .certificationButton {
                 margin-left: 3vw;
+
+                &[disabled] {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
             }
         }
     }

@@ -40,11 +40,16 @@ export const FormItem = defineComponent({
     },
     onClick: {
       type: Function as PropType<() => void>
+    },
+    countFrom: {
+      type: Number,
+      default: 60
     }
   },
   setup: (props, context) => {
 
     const refDateVisible = ref(false)
+
     const content = computed(() => {
       switch (props.type) {
         case 'text':

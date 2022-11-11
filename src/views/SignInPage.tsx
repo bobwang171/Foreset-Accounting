@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive } from 'vue';
+import { computed, defineComponent, PropType, reactive, ref } from 'vue';
 import { MainLayout } from '../layouts/MainLayout';
 import s from './SignInPage.module.scss'
 import { Icon } from '../shared/icon';
@@ -7,6 +7,12 @@ import { Button } from '../shared/Button';
 import { validate } from '../shared/Validate';
 import axios from 'axios';
 export const SignIn = defineComponent({
+    props: {
+        countFrom: {
+            type: Number,
+            default: 60
+        }
+    },
     setup: (props, context) => {
         const formData = reactive({
             email: "",
@@ -32,6 +38,20 @@ export const SignIn = defineComponent({
             const response = await axios.post("/api/v1/validation_codes", { email: formData.email })
 
         }
+        const timer = ref<number>()
+        const count = ref<number>(props.countFrom)
+        const isCounting = computed(() => !!timer.value)
+        const onClickSendWithTimer = () => {
+            onClickSendCertificationCode()
+            timer.value = setInterval(() => {
+                count.value -= 1
+                if (count.value === 0) {
+                    clearInterval(timer.value);
+                    timer.value = undefined
+                    count.value = props.countFrom
+                }
+            }, 1000)
+        }
         return () => (
             <MainLayout>
                 {{
@@ -44,7 +64,9 @@ export const SignIn = defineComponent({
                                 <FormItem type='text' label='邮箱地址' placeholder='请输入邮箱，然后点击发送验证码' v-model={formData.email} error={errors.email?.[0] ?? "　"}></FormItem>
                                 <div class={s.certificationCode_wrapper}>
                                     <FormItem class={s.certificationCode} type='text' label='验证码' placeholder='请输入六位数字' v-model={formData.code} error={errors.code?.[0] ?? "　"}></FormItem>
-                                    <Button class={s.certificationButton} onClick={onClickSendCertificationCode}><span>发送验证码</span></Button>
+                                    <Button disabled={isCounting.value} class={s.certificationButton} onClick={onClickSendWithTimer}>
+                                        {isCounting.value ? `等待${count.value}秒后重置` : "点击获取验证码"}
+                                    </Button>
                                 </div>
                                 <Button class={s.loginButton}>登录</Button>
                             </Form>
