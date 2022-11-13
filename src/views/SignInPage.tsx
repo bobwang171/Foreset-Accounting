@@ -7,6 +7,7 @@ import { Button } from '../shared/Button';
 import { validate, hasError } from '../shared/Validate';
 import axios from 'axios';
 import { history } from '../shared/history';
+import { useRouter } from 'vue-router';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -44,7 +45,13 @@ export const SignIn = defineComponent({
             if (!hasError(newErrors)) {
                 const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
                 localStorage.setItem("jwt", response.data.jwt)
-                history.push("/")
+                const returnTo = localStorage.getItem("returnTo")
+                if (returnTo) {
+                    useRouter().push("returnTo")
+                }
+                else {
+                    useRouter().push("/")
+                }
             }
         }
         const onClickSendCertificationCode = async () => {
