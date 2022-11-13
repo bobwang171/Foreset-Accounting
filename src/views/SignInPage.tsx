@@ -4,13 +4,14 @@ import s from './SignInPage.module.scss'
 import { Icon } from '../shared/icon';
 import { Form, FormItem } from '../shared/Form';
 import { Button } from '../shared/Button';
-import { validate } from '../shared/Validate';
+import { validate, hasError } from '../shared/Validate';
 import axios from 'axios';
+import { history } from '../shared/history';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
             type: Number,
-            default: 60
+            default: 10
         }
     },
     setup: (props, context) => {
@@ -23,7 +24,7 @@ export const SignIn = defineComponent({
             code: ""
         })
 
-        const onSubmit = (e: Event) => {
+        const onSubmit = async (e: Event) => {
             e.preventDefault()
             Object.assign(errors, {
                 email: [], code: []
@@ -33,6 +34,17 @@ export const SignIn = defineComponent({
             { key: "code", type: "required", message: "必填" }])
 
             Object.assign(errors, newErrors)
+            // const onError = (error: any) => {
+            //     if (error.response.data.errors === "422") {
+            //         Object.assign(errors, error.response.data.errors)
+            //     }
+            //     throw error
+            // }
+            if (!hasError(newErrors)) {
+                const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
+                localStorage.setItem("jwt", response.data.jwt)
+                history.push("/")
+            }
         }
         const onClickSendCertificationCode = async () => {
             const response = await axios.post("/api/v1/validation_codes", { email: formData.email })
@@ -68,7 +80,7 @@ export const SignIn = defineComponent({
                                         {isCounting.value ? `等待${count.value}秒后重置` : "点击获取验证码"}
                                     </Button>
                                 </div>
-                                <Button class={s.loginButton}>登录</Button>
+                                <Button class={s.loginButton} onClick={onSubmit}>登录</Button>
                             </Form>
                         </div>
                     </>

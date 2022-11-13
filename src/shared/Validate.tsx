@@ -12,10 +12,10 @@ type Rule<T> = {
     )
 type Rules<T> = Rule<T>[]
 
-export type { Rules,Rule,FData }
+export type { Rules, Rule, FData }
 export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
     type Errors = {
-        [k in keyof T]?:string[]
+        [k in keyof T]?: string[]
     }
     const errors: Errors = reactive({})
     rules.map(rule => {
@@ -30,7 +30,7 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
                 break;
             case "pattern":
                 if (value && !rule.regex.test(value.toString())) {
-                    errors[key] = errors[key] ?? []  
+                    errors[key] = errors[key] ?? []
                     errors[key].push(message)
                 }
                 break;
@@ -39,4 +39,17 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
         }
     })
     return errors
+
+}
+
+export function hasError(errors: Record<string, string[]>) {
+    let result = false
+    for (let i in errors) {
+        if (errors[i].length > 0) {
+            result = true
+            break
+        }
+    }
+
+    return result
 }
