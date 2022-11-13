@@ -47,7 +47,7 @@ export const SignIn = defineComponent({
                 localStorage.setItem("jwt", response.data.jwt)
                 const returnTo = localStorage.getItem("returnTo")
                 if (returnTo) {
-                    useRouter().push("returnTo")
+                    useRouter().push(returnTo)
                 }
                 else {
                     useRouter().push("/")

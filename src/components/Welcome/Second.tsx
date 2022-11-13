@@ -1,22 +1,23 @@
 import s from "./WelcomeLayout.module.scss"
 import { RouterLink } from "vue-router"
 import { WelcomeLayout } from "./WelcomeLayout"
+import { SkipFeature } from '../../shared/SkipFeature';
 
 export const Second = {
-    render :() => (
+    render: () => (
         <WelcomeLayout>
             {{
                 icon: () => <svg>
                     <use xlinkHref='#clock'></use>
                 </svg>,
-                title:()=><h2>每日提醒<br />不遗漏每一笔账单</h2>,
+                title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
                 buttons: () => <>
-                <RouterLink to="/start" class={s.fake}>跳过</RouterLink>
-                <RouterLink to="/welcome/3">下一页</RouterLink>
-                <RouterLink to="/start">跳过</RouterLink></>
-            
+                    <SkipFeature class={s.fake} />
+                    <RouterLink to="/welcome/3">下一页</RouterLink>
+                    <SkipFeature />
+                </>
+
             }}
         </WelcomeLayout>
     )
 }
-            
