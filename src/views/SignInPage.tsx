@@ -29,17 +29,18 @@ export const SignIn = defineComponent({
             Object.assign(errors, {
                 email: [], code: []
             })
+
             const newErrors = validate(formData, [{ key: "email", type: "required", message: "必填" },
             { key: "email", type: "pattern", regex: /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/, message: "必须为邮箱地址" },
             { key: "code", type: "required", message: "必填" }])
 
             Object.assign(errors, newErrors)
-            // const onError = (error: any) => {
-            //     if (error.response.data.errors === "422") {
-            //         Object.assign(errors, error.response.data.errors)
-            //     }
-            //     throw error
-            // }
+            const onError = (error: any) => {
+                if (error.response.data.errors === "422") {
+                    Object.assign(errors, error.response.data.errors)
+                }
+                throw error
+            }
             if (!hasError(newErrors)) {
                 const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
                 localStorage.setItem("jwt", response.data.jwt)
