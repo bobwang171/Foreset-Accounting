@@ -13,6 +13,7 @@ import { TagCreate } from '../components/Tags/TagCreate';
 import { TagEdit } from '../components/Tags/TagEdit';
 import { SignIn } from '../views/SignInPage';
 import { Statistics } from '../views/StatisticsPage';
+import axios from 'axios';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -34,6 +35,12 @@ export const routes: RouteRecordRaw[] = [
     { path: "/start", component: StartPage },
     {
         path: "/Item", component: ItemPage,
+        beforeEnter: (to, from, next) => {
+            axios.get("./me").catch(() => {
+                next("/sign_in?return_to=" + to.path)
+            })
+            next();
+        },
         children: [
             { path: "", component: ItemList },
             { path: "create", component: ItemCreate }

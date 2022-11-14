@@ -1,4 +1,4 @@
-import { computed, defineComponent, PropType, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
 import { MainLayout } from '../layouts/MainLayout';
 import s from './SignInPage.module.scss'
 import { Icon } from '../shared/icon';
@@ -6,8 +6,7 @@ import { Form, FormItem } from '../shared/Form';
 import { Button } from '../shared/Button';
 import { validate, hasError } from '../shared/Validate';
 import axios from 'axios';
-import { history } from '../shared/history';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -42,15 +41,18 @@ export const SignIn = defineComponent({
                 }
                 throw error
             }
+            const router = useRouter()
+            const route = useRoute()
             if (!hasError(newErrors)) {
                 const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
                 localStorage.setItem("jwt", response.data.jwt)
-                const returnTo = localStorage.getItem("returnTo")
+
+                const returnTo = route.query.return_to.toString()
                 if (returnTo) {
-                    useRouter().push(returnTo)
+                    router.push(returnTo)
                 }
                 else {
-                    useRouter().push("/")
+                    router.push("/")
                 }
             }
         }
