@@ -36,10 +36,9 @@ export const routes: RouteRecordRaw[] = [
     {
         path: "/Item", component: ItemPage,
         beforeEnter: (to, from, next) => {
-            axios.get("./me").catch(() => {
+            axios.get("/api/v1/me").then(next).catch(() => {
                 next("/sign_in?return_to=" + to.path)
             })
-            next();
         },
         children: [
             { path: "", component: ItemList },
