@@ -46,6 +46,13 @@ export const SignIn = defineComponent({
             if (!hasError(newErrors)) {
                 const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
                 localStorage.setItem("jwt", response.data.jwt)
+                axios.interceptors.request.use(config => {
+                    const token = localStorage.getItem("jwt")
+                    if (token) {
+                        config.headers.Authorization = `Bearer ${token}`
+                    }
+                    return config
+                })
 
                 const returnTo = route.query.return_to.toString()
                 if (returnTo) {
@@ -56,6 +63,7 @@ export const SignIn = defineComponent({
                 }
             }
         }
+
         const onClickSendCertificationCode = async () => {
             const response = await axios.post("/api/v1/validation_codes", { email: formData.email })
 
