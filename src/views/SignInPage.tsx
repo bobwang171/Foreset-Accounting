@@ -5,8 +5,8 @@ import { Icon } from '../shared/icon';
 import { Form, FormItem } from '../shared/Form';
 import { Button } from '../shared/Button';
 import { validate, hasError } from '../shared/Validate';
-import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
+import { http } from '../shared/Http';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -23,6 +23,8 @@ export const SignIn = defineComponent({
             email: "",
             code: ""
         })
+        const router = useRouter()
+        const route = useRoute()
 
         const onSubmit = async (e: Event) => {
             e.preventDefault()
@@ -41,20 +43,14 @@ export const SignIn = defineComponent({
                 }
                 throw error
             }
-            const router = useRouter()
-            const route = useRoute()
-            if (!hasError(newErrors)) {
-                const response = await axios.post<{ jwt: string }>("/api/v1/session", formData)
-                localStorage.setItem("jwt", response.data.jwt)
-                axios.interceptors.request.use(config => {
-                    const token = localStorage.getItem("jwt")
-                    if (token) {
-                        config.headers.Authorization = `Bearer ${token}`
-                    }
-                    return config
-                })
 
-                const returnTo = route.query.return_to.toString()
+            if (!hasError(newErrors)) {
+                const response = await http.post<{ jwt: string }>("/api/v1/session", formData, {
+                    params: { _mock: "session" }
+                }).catch(onError)
+                localStorage.setItem("jwt", response.data.jwt)
+
+                const returnTo = route?.query?.return_to?.toString()
                 if (returnTo) {
                     router.push(returnTo)
                 }
@@ -65,7 +61,7 @@ export const SignIn = defineComponent({
         }
 
         const onClickSendCertificationCode = async () => {
-            const response = await axios.post("/api/v1/validation_codes", { email: formData.email })
+            const response = await http.post("/api/v1/validation_codes", { email: formData.email })
 
         }
         const timer = ref<number>()
