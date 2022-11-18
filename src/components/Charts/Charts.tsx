@@ -21,11 +21,11 @@ export const Charts = defineComponent({
     setup: (props, context) => {
         const lineChart = ref<HTMLDivElement>()
         const pieChart = ref<HTMLDivElement>()
-        const category = ref("expenses")
+        const kind = ref("expenses")
         const option = {
             grid: [{ top: 20, left: 40, bottom: 20 }],
             xAxis: {
-                type: 'category',
+                type: 'kind',
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
@@ -95,7 +95,7 @@ export const Charts = defineComponent({
                 <FormItem label='类型' type='select' options={[
                     { value: "expenses", text: "支出" },
                     { value: "income", text: "收入" }
-                ]} v-model={category.value} />
+                ]} v-model={kind.value} />
 
                 <div class={s.lineChart} ref={lineChart}></div>
                 <div class={s.pieChart} ref={pieChart}></div>

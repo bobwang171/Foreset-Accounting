@@ -4,21 +4,26 @@ import { createRouter }  from 'vue-router'
 import { history } from './shared/history';
 import { routes } from './shared/routes';
 import "@svgstore";
-import axios from 'axios';
+import { http } from './shared/Http';
+import { fetchMe, mePromise, } from './shared/me';
+
 
 
 const router = createRouter({ history, routes })
+fetchMe()
+const promise=http.get("/api/v1/me")
 router.beforeEach(async(to,from) => {
     if (to.path === "/" || to.path === "/start" || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
         return true
     }
     else {
-       await axios.get("/api/v1/me").catch(() => {
-
-            return ("/sign_in?return_to=" + to.path)
-        })
+        const path = await mePromise.then(
+            () => true,
+            () => {
+                return '/sign_in?return_to' + to.path
+            })
+        return path
     }
-    return true
 })
 const app = createApp(App)
 app.use(router)

@@ -7,6 +7,7 @@ import { Button } from '../shared/Button';
 import { validate, hasError } from '../shared/Validate';
 import { useRoute, useRouter } from 'vue-router';
 import { http } from '../shared/Http';
+import { refreshMe } from '../shared/me';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -45,18 +46,21 @@ export const SignIn = defineComponent({
             }
 
             if (!hasError(newErrors)) {
-                const response = await http.post<{ jwt: string }>("/api/v1/session", formData, {
-                    params: { _mock: "session" }
-                }).catch(onError)
+                const response = await http.post<{ jwt: string }>("/api/v1/session", formData, { params: { _mock: "session" } }).catch(onError)
                 localStorage.setItem("jwt", response.data.jwt)
 
                 const returnTo = route?.query?.return_to?.toString()
-                if (returnTo) {
-                    router.push(returnTo)
-                }
-                else {
-                    router.push("/")
-                }
+                refreshMe().then(() => {
+                    if (returnTo) {
+                        router.push(returnTo)
+                    }
+                    else {
+                        router.push("/")
+                    }
+                }, () => {
+                    window.alert("登录失败")
+                })
+
             }
         }
 
