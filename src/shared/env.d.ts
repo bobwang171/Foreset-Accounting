@@ -9,3 +9,19 @@ declare module '*.vue' {
 
 type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
+type Tag = {
+  id: number,
+  name: string,
+  sign: any,
+  kind: "income" | "expenses"
+
+}
+
+type Resources<T=any> = {
+  resources: T[],
+  pager: {
+    page: number,
+    per_page: number,
+    count: number
+  }
+}

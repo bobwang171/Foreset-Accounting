@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive, ref } from 'vue';
+import { computed, defineComponent, reactive, ref, PropType } from 'vue';
 import { MainLayout } from '../layouts/MainLayout';
 import s from './SignInPage.module.scss'
 import { Icon } from '../shared/icon';
@@ -46,7 +46,9 @@ export const SignIn = defineComponent({
             }
 
             if (!hasError(newErrors)) {
-                const response = await http.post<{ jwt: string }>("/api/v1/session", formData, { params: { _mock: "session" } }).catch(onError)
+                const response = await http.post<{ jwt: string }>("/api/v1/session", formData,
+                    { params: { _mock: "session" } }).catch(onError)
+                console.log(response)
                 localStorage.setItem("jwt", response.data.jwt)
 
                 const returnTo = route?.query?.return_to?.toString()
@@ -57,9 +59,11 @@ export const SignIn = defineComponent({
                     else {
                         router.push("/")
                     }
-                }, () => {
-                    window.alert("登录失败")
-                })
+                },
+                    () => {
+                        window.alert("登录失败")
+                    }
+                )
 
             }
         }

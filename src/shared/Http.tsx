@@ -5,7 +5,6 @@ type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
 type PatchConfig = Omit<AxiosRequestConfig, 'url' | 'data'>
 type DeleteConfig = Omit<AxiosRequestConfig, 'params'>
-type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
 export class Http {
     instance: AxiosInstance

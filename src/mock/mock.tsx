@@ -1,5 +1,4 @@
 import { AxiosRequestConfig } from 'axios';
-import { Icon } from '../shared/icon';
 import { faker } from '@faker-js/faker';
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
@@ -7,15 +6,15 @@ type Mock = (config: AxiosRequestConfig) => [number, any]
 
 export const mockSession: Mock = (config) => {
     return [200, {
-        jwt: "111"
+        jwt: faker.word.adverb
     }]
 }
 export const mockTagIndex: Mock = (config) => {
-
+    const { page, kind } = config.params
+    let id = 0
     const createId = () => {
-        let i = 0
-        i += 1
-        return i
+        id += 1
+        return id
     }
 
     const createTag = (n = 1) =>
@@ -31,16 +30,18 @@ export const mockTagIndex: Mock = (config) => {
 
         )
 
-    if (config.params.kind === "expenses") {
+    if (kind === "expenses") {
         return [200, {
             resources:
                 createTag(30)
         }]
     } else {
         return [200, {
-            resources:
-                createTag(30)
+            resources: createTag(25),
+            pager: 1,
+            per_page: 25
         }
+
         ]
     }
 

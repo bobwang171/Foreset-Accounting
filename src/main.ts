@@ -11,7 +11,6 @@ import { fetchMe, mePromise, } from './shared/me';
 
 const router = createRouter({ history, routes })
 fetchMe()
-const promise=http.get("/api/v1/me")
 router.beforeEach(async(to,from) => {
     if (to.path === "/" || to.path === "/start" || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
         return true
@@ -20,7 +19,7 @@ router.beforeEach(async(to,from) => {
         const path = await mePromise.then(
             () => true,
             () => {
-                return '/sign_in?return_to' + to.path
+                return '/sign_in?return_to=' + to.path
             })
         return path
     }

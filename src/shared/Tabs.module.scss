@@ -1,29 +1,36 @@
-.tabs_nav{
+.tabs {
+  position: relative;
+
+  &_nav {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
-    flex-grow: 0;
-    flex-shrink: 0;
+    color: #fff;
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    background: #8F4CD7;
 
- >li{
-    flex-grow: 1;
-    flex-shrink: 0;
-    padding: 12px 0;
-    background-color: #8c4bd6;
-    color: white;
-    &.selected{
+    >li {
+      flex-grow: 1;
+      flex-shrink: 0;
+      padding: 12px 0;
+
+      &.selected {
         position: relative;
-        &::after{
-            content: "";
-            display: block;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: rgba(255,255,255,0.5);
+
+        &::after {
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: #C8B1FF;
         }
+      }
     }
- }   
+  }
 }
