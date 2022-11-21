@@ -2,7 +2,20 @@ import { AxiosRequestConfig } from 'axios';
 import { faker } from '@faker-js/faker';
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
-
+export const mockItemCreate: Mock = (config) => {
+    return [200, {
+        "id": 16443,
+        "user_id": 9996,
+        "amount": 9900,
+        "note": null,
+        "tag_ids": [27038],
+        "happen_at": "2020-10-30T00:00:00.000+08:00",
+        "created_at": "2022-11-15T22:10:02.300+08:00",
+        "updated_at": "2022-11-15T22:10:02.300+08:00",
+        "kind": "expenses",
+        "deleted_at": null
+    }]
+}
 
 export const mockSession: Mock = (config) => {
     return [200, {

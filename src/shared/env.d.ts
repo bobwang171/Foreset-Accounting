@@ -25,3 +25,15 @@ type Resources<T=any> = {
     count: number
   }
 }
+type Resource<T> = {
+  resources: T
+}
+
+type Item = {
+  id: number,
+  user_id: number,
+  amount: number,
+  tag_ids: number[],
+  happen_at: string,
+  kind: "expenses" | "income",
+}

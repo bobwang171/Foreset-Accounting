@@ -10,10 +10,12 @@ export const NumberPad = defineComponent({
     },
     amount: {
       type: Number
+    },
+    onSubmit: {
+      type: Function as PropType<() => void>
     }
   },
   setup: (props, context) => {
-    const now = new Date()
     const refAmount = ref(props.amount ? (props.amount / 100).toString() : "0")
     const appendText = (n: string | number) => {
       const nString = n.toString()
@@ -57,7 +59,12 @@ export const NumberPad = defineComponent({
       { text: ".", onClick: () => { appendText(".") } },
       { text: "0", onClick: () => { appendText(0) } },
       { text: "清空", onClick: () => { refAmount.value = "" } },
-      { text: "提交", onClick: () => context.emit("update:amount", parseFloat(refAmount.value) * 100) },
+      {
+        text: "提交", onClick: () => {
+          context.emit("update:amount", parseFloat(refAmount.value) * 100)
+          props.onSubmit?.()
+        }
+      },
 
     ]
     const refDatePickerVisible = ref(false)
