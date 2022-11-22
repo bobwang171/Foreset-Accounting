@@ -1,4 +1,4 @@
-import { defineComponent, PropType, reactive } from 'vue';
+import { defineComponent, onMounted, PropType, reactive } from 'vue';
 import { Button } from '../../shared/Button';
 import { EmojiSelect } from '../../shared/EmojiSelect';
 import { hasError, Rules, validate } from '../../shared/Validate';
@@ -6,13 +6,17 @@ import s from './Tag.module.scss'
 import { useRoute, useRouter } from 'vue-router';
 import { http } from '../../shared/Http';
 export const TagLayout = defineComponent({
+    props: {
+        id: Number
+    },
     setup: (props, context) => {
         const route = useRoute()
         const router = useRouter()
-        const formData = reactive({
+        const formData = reactive<Partial<Tag>>({
+            id: undefined,
             name: "",
             sign: "",
-            kind: route.query.kind?.toString()
+            kind: route.query.kind.toString(),
         })
         const errors = reactive({})
         const onError = (error: any) => {
@@ -21,6 +25,18 @@ export const TagLayout = defineComponent({
             }
             throw error
         }
+        onMounted(async () => {
+            if (props.id) {
+                const response = await http.get<Resource<Tag>>(`/api/v1/tags/${props.id}`, {
+                    _mock: "tagShow"
+                }
+                )
+                console.log(response)
+                Object.assign(formData, response.data.resources)
+            } else {
+                return
+            }
+        })
         const onSubmit = async (e: Event) => {
             e.preventDefault()
             const rules: Rules<typeof formData> = [
@@ -34,9 +50,17 @@ export const TagLayout = defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
-                const response = await http.post("/api/v1/tags", formData,
-                    { params: { _mock: "tagCreate" } }).catch(onError)
-                router.back()
+                if (props.id) {
+                    const response = await http.patch<Resource<Tag>>(`/api/v1/tags/${props.id}`, {
+                        _mock: "tagEdit"
+                    }).catch(onError)
+                    router.back()
+                } else {
+                    const response = await http.post("/api/v1/tags", formData,
+                        { params: { _mock: "tagCreate" } }).catch(onError)
+                    router.back()
+                }
+
             }
 
 

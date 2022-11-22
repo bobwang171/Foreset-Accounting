@@ -3,6 +3,7 @@
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
+import { PropType } from 'vue';
   const component: DefineComponent<{}, {}, any>
   export default component
 }
@@ -13,7 +14,7 @@ type Tag = {
   id: number,
   name: string,
   sign: any,
-  kind: "income" | "expenses"
+  kind: income | expenses
 
 }
 
@@ -35,5 +36,5 @@ type Item = {
   amount: number,
   tag_ids: number[],
   happen_at: string,
-  kind: "expenses" | "income",
+  kind: expenses | income
 }

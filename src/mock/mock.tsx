@@ -2,6 +2,12 @@ import { AxiosRequestConfig } from 'axios';
 import { faker } from '@faker-js/faker';
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
+let id = 0
+const createId = () => {
+    id += 1
+    return id
+}
+
 export const mockItemCreate: Mock = (config) => {
     return [200, {
         "id": 16443,
@@ -17,31 +23,39 @@ export const mockItemCreate: Mock = (config) => {
     }]
 }
 
+
 export const mockSession: Mock = (config) => {
     return [200, {
         jwt: faker.word.adverb
     }]
 }
+export const mockTagShow: Mock = (config) => {
+    const createTag = (attrs?: any) =>
+    ({
+        id: createId(),
+        name: faker.name.firstName(),
+        sign: faker.internet.emoji(),
+        kind: "expenses",
+    })
+    return [200, { resources: createTag() }]
+}
+
+
 export const mockTagIndex: Mock = (config) => {
     const { page, kind } = config.params
-    let id = 0
-    const createId = () => {
-        id += 1
-        return id
-    }
 
-    const createTag = (n = 1) =>
+
+    const createTag = (n = 1) => {
         Array.from({ length: n }).map(
             () => ({
                 id: createId(),
-                name: faker.name.firstName(),
+                name: faker.word.noun(),
                 sign: faker.internet.emoji(),
-                kind: config.params.kind
+                kind: config.params.kind,
 
             })
-
-
         )
+    }
 
     if (kind === "expenses") {
         return [200, {
