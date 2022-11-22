@@ -50,20 +50,15 @@ export const TagLayout = defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
-                if (props.id) {
+                const promise = await formData.id ?
                     await http.patch(`/api/v1/tags/${formData.id}`, formData,
                         { params: { _mock: "tagEdit" } }
                     ).catch(onError)
-                    router.back()
-                } else {
+                    :
                     await http.post("/api/v1/tags", formData,
                         { params: { _mock: "tagCreate" } }).catch(onError)
-                    router.back()
-                }
-
+                router.back()
             }
-
-
         }
         return () => (
             (

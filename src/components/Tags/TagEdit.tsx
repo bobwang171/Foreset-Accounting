@@ -4,7 +4,9 @@ import { Icon } from '../../shared/icon';
 import { TagLayout } from './TagLayout';
 import { Button } from '../../shared/Button';
 import s from './Tag.module.scss'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { http } from '../../shared/Http';
+import { Dialog } from 'vant';
 export const TagEdit = defineComponent({
   props: {
     name: {
@@ -13,9 +15,19 @@ export const TagEdit = defineComponent({
   },
   setup: (props, context) => {
     const route = useRoute()
+    const router = useRouter()
     const numberId = parseInt(route.params.id.toString())
     if (Number.isNaN(numberId)) {
       return () => <div>id 不存在</div>
+    }
+    const onDelete = async (option?: { withItems: boolean }) => {
+      await Dialog.confirm({
+        title: "确认",
+        message: "你真的要删除吗？"
+      })
+      await http.delete(`/api/v1/tags/${numberId}`,
+        { withItem: option?.withItems ? "true" : "false" }).catch()
+      router.back()
     }
     return () => (
       <MainLayout>
@@ -26,8 +38,8 @@ export const TagEdit = defineComponent({
             <>
               <TagLayout id={numberId} />
               <div class={s.actions}>
-                <Button level="danger" class={s.removeTag} onClick={() => { }}>删除标签</Button>
-                <Button level='danger' class={s.removeTagAndItem}>删除标签和记账</Button>
+                <Button level="danger" class={s.removeTag} onClick={() => onDelete()}>删除标签</Button>
+                <Button level='danger' class={s.removeTagAndItem} onClick={() => onDelete({ withItems: true })}>删除标签和记账</Button>
               </div>
             </>
         }}</MainLayout>
