@@ -16,7 +16,7 @@ export const TagLayout = defineComponent({
             id: undefined,
             name: "",
             sign: "",
-            kind: route.query.kind.toString(),
+            kind: route.query.kind,
         })
         const errors = reactive({})
         const onError = (error: any) => {
@@ -51,12 +51,12 @@ export const TagLayout = defineComponent({
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
                 if (props.id) {
-                    const response = await http.patch<Resource<Tag>>(`/api/v1/tags/${props.id}`, {
-                        _mock: "tagEdit"
-                    }).catch(onError)
+                    await http.patch(`/api/v1/tags/${formData.id}`, formData,
+                        { params: { _mock: "tagEdit" } }
+                    ).catch(onError)
                     router.back()
                 } else {
-                    const response = await http.post("/api/v1/tags", formData,
+                    await http.post("/api/v1/tags", formData,
                         { params: { _mock: "tagCreate" } }).catch(onError)
                     router.back()
                 }

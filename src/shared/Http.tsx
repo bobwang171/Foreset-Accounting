@@ -50,7 +50,6 @@ const mock = (response: AxiosResponse) => {
             [response.status, response.data] = mockItemCreate(response.config)
             return true
 
-
     }
     return false
 }
@@ -67,7 +66,7 @@ http.instance.interceptors.request.use(config => {
 
 http.instance.interceptors.response.use((response) => {
     //使用Axios拦截器篡改response
-    mock(response)
+    // mock(response)
     return response
 }, (error) => {
     if (mock(error.response)) {

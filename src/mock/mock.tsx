@@ -39,14 +39,18 @@ export const mockTagShow: Mock = (config) => {
     })
     return [200, { resources: createTag() }]
 }
+const TagEdit: Mock = (config) => {
+    return [200, {
 
+    }]
+}
 
 export const mockTagIndex: Mock = (config) => {
     const { page, kind } = config.params
 
 
     const createTag = (n = 1) => {
-        Array.from({ length: n }).map(
+        return Array.from({ length: n }).map(
             () => ({
                 id: createId(),
                 name: faker.word.noun(),
