@@ -7,6 +7,7 @@ import { Tags } from './Tags';
 import { NumberPad } from '../../shared/NumberPad';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
+import { BackIcon } from '../../shared/BackIcon';
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -29,7 +30,7 @@ export const ItemCreate = defineComponent({
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
-        icon: () => <Icon name="return" class={s.navIcon} />,
+        icon: () => <BackIcon class={s.navIcon} />,
         default: () => <>
           <div class={s.wrapper}>
             <Tabs v-model:selected={formData.kind} class={s.tabs}>

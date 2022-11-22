@@ -8,6 +8,7 @@ import { validate, hasError } from '../shared/Validate';
 import { useRoute, useRouter } from 'vue-router';
 import { http } from '../shared/Http';
 import { refreshMe } from '../shared/me';
+import { BackIcon } from '../shared/BackIcon';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -90,7 +91,7 @@ export const SignIn = defineComponent({
             <MainLayout>
                 {{
                     title: () => "登录",
-                    icon: () => <Icon name="return"></Icon>,
+                    icon: () => <BackIcon />,
                     default: () => <>
                         <div class={s.wrapper}>
                             <div class={s.logo}><Icon name='mangosteen' /></div>
