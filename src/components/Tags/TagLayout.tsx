@@ -1,17 +1,27 @@
 import { defineComponent, PropType, reactive } from 'vue';
 import { Button } from '../../shared/Button';
 import { EmojiSelect } from '../../shared/EmojiSelect';
-import { Rules, validate } from '../../shared/Validate';
+import { hasError, Rules, validate } from '../../shared/Validate';
 import s from './Tag.module.scss'
+import { useRoute, useRouter } from 'vue-router';
+import { http } from '../../shared/Http';
 export const TagLayout = defineComponent({
     setup: (props, context) => {
+        const route = useRoute()
+        const router = useRouter()
         const formData = reactive({
             name: "",
-            sign: ""
+            sign: "",
+            kind: route.query.kind?.toString()
         })
         const errors = reactive({})
-
-        const onSubmit = (e: Event) => {
+        const onError = (error: any) => {
+            if (error.response.data.errors === "422") {
+                Object.assign(errors, error.response.data.errors)
+            }
+            throw error
+        }
+        const onSubmit = async (e: Event) => {
             e.preventDefault()
             const rules: Rules<typeof formData> = [
                 { key: "name", type: "required", message: "必填" },
@@ -19,11 +29,15 @@ export const TagLayout = defineComponent({
                 { key: "sign", type: "required", message: "必填" }
             ]
             Object.assign(errors, {
-                name: undefined,
-                sign: undefined
+                name: [],
+                sign: []
             })
             Object.assign(errors, validate(formData, rules))
-            console.log(errors)
+            if (!hasError(errors)) {
+                const response = await http.post("/api/v1/tags", formData,
+                    { params: { _mock: "tagCreate" } }).catch(onError)
+                router.back()
+            }
 
 
         }
@@ -60,7 +74,7 @@ export const TagLayout = defineComponent({
                     <p class={s.tips}>记账时长按标签即可进行编辑</p>
                     <div class={s.formRow}>
                         <div class={s.formItem_value}>
-                            <Button class={[s.formItem, s.button]}>确定</Button>
+                            <Button type='submit' class={[s.formItem, s.button]}>确定</Button>
                         </div>
                     </div>
                 </form>

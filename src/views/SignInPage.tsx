@@ -49,7 +49,6 @@ export const SignIn = defineComponent({
             if (!hasError(newErrors)) {
                 const response = await http.post<{ jwt: string }>("/api/v1/session", formData,
                     { params: { _mock: "session" } }).catch(onError)
-                console.log(response)
                 localStorage.setItem("jwt", response.data.jwt)
 
                 const returnTo = route?.query?.return_to?.toString()

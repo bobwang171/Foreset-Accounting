@@ -45,7 +45,7 @@ export const validate = <T extends FData>(formData: T, rules: Rules<T>) => {
 export function hasError(errors: Record<string, string[]>) {
     let result = false
     for (let i in errors) {
-        if (errors[i].length > 0) {
+        if (errors[i]?.length > 0) {
             result = true
             break
         }

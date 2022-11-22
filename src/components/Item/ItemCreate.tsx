@@ -24,7 +24,6 @@ export const ItemCreate = defineComponent({
     })
     const onSubmit = async () => {
       const response = await http.post<Resource<Item>>("/api/v1/items", formData, { params: { _mock: "itemCreate" } })
-      console.log(response.data)
     }
 
     return () => (
