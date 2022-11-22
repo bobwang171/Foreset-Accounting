@@ -4,7 +4,7 @@ import { http } from '../../shared/Http';
 import { Icon } from '../../shared/Icon';
 import { useTags } from '../../shared/useTags';
 import s from './Tags.module.scss';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
 export const Tags = defineComponent({
     emits: ["update:selected"],
     props: {
@@ -24,19 +24,21 @@ export const Tags = defineComponent({
                 _mock: 'tagIndex'
             })
         })
+        const router = useRouter()
         const onSelect = (tag: Tag) => {
             context.emit("update:selected", tag.id)
         }
         const timer = ref<number>()
         const currentPoint = ref<HTMLDivElement>()
-        const onLongPress = () => {
-            console.log("长按")
+        const onLongPress = (id: number) => {
+            router.push(`/tags/${id}/edit?return_to=${router.currentRoute.value.fullPath}`)
+            console.log(id)
         }
 
-        const onTouchStart = (e: TouchEvent) => {
+        const onTouchStart = (e: TouchEvent, tag: Tag) => {
             currentPoint.value = e.currentTarget as HTMLDivElement
             timer.value = setTimeout(() => {
-                onLongPress()
+                onLongPress(tag.id)
             }, 500)
         }
         const onTouchEnd = (e: TouchEvent) => {
@@ -64,7 +66,7 @@ export const Tags = defineComponent({
                 {tags.value.map(tag =>
                     <div class={[s.tag, props.selected === tag.id ? s.selected : ""]}
                         onClick={() => onSelect(tag)}
-                        onTouchstart={onTouchStart}
+                        onTouchstart={(e) => onTouchStart(e, tag)}
                         onTouchend={onTouchEnd}>
 
 
