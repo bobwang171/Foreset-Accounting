@@ -1,4 +1,4 @@
-import { defineComponent, onUpdated, PropType } from 'vue';
+import { defineComponent, onUpdated, PropType, ref } from 'vue';
 import { Button } from '../../shared/Button';
 import { http } from '../../shared/Http';
 import { Icon } from '../../shared/Icon';
@@ -27,8 +27,32 @@ export const Tags = defineComponent({
         const onSelect = (tag: Tag) => {
             context.emit("update:selected", tag.id)
         }
+        const timer = ref<number>()
+        const currentPoint = ref<HTMLDivElement>()
+        const onLongPress = () => {
+            console.log("长按")
+        }
+
+        const onTouchStart = (e: TouchEvent) => {
+            currentPoint.value = e.currentTarget as HTMLDivElement
+            timer.value = setTimeout(() => {
+                onLongPress()
+            }, 500)
+        }
+        const onTouchEnd = (e: TouchEvent) => {
+            clearTimeout(timer.value)
+        }
+        const onTouchMove = (e: TouchEvent) => {
+            const pointedElement = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
+
+            if (currentPoint.value.contains(pointedElement) || currentPoint.value === pointedElement) {
+
+            } else {
+                clearTimeout(timer.value)
+            }
+        }
         return () => <>
-            <div class={s.tags_wrapper}>
+            <div class={s.tags_wrapper} onTouchmove={onTouchMove}>
                 <RouterLink to={`/tags/create?kind=${props.kind}`} class={s.tag}>
                     <div class={s.sign}>
                         <Icon name="add" class={s.createTag} />
@@ -39,7 +63,11 @@ export const Tags = defineComponent({
                 </RouterLink>
                 {tags.value.map(tag =>
                     <div class={[s.tag, props.selected === tag.id ? s.selected : ""]}
-                        onClick={() => onSelect(tag)}>
+                        onClick={() => onSelect(tag)}
+                        onTouchstart={onTouchStart}
+                        onTouchend={onTouchEnd}>
+
+
                         <div class={s.sign}>
                             {tag.sign}
                         </div>
