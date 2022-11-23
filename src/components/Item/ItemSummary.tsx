@@ -7,11 +7,11 @@ export const ItemSummary = defineComponent({
   props: {
     startDate: {
       type: String as PropType<string>,
-      required: false
+
     },
     endDate: {
       type: String as PropType<string>,
-      required: false
+
     }
   },
   setup: (props, context) => {
@@ -33,7 +33,7 @@ export const ItemSummary = defineComponent({
             </li>
           </ul>
           <div class={s.itemList}>
-            <ItemComponent />
+            <ItemComponent startDate={props.startDate} endDate={props.endDate} />
           </div>
           <Form>
           </Form>
