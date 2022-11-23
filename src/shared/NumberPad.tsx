@@ -1,5 +1,5 @@
 import { defineComponent, PropType, ref } from 'vue';
-import { Icon, IconName } from './icon';
+import { Icon } from './icon';
 import { DatetimePicker, Popup } from 'vant'
 import s from './NumberPad.module.scss'
 import dayjs from 'dayjs';

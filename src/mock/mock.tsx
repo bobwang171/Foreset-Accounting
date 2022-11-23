@@ -28,6 +28,19 @@ export const mockSession: Mock = (config) => {
     return [200, {
         jwt: faker.word.adverb
     }]
+
+}
+export const mockItemIndex: Mock = (config) => {
+    const createItem = (n = 1, attrs?: any) =>
+        Array.from({ length: n }).map(() => ({
+            id: createId(),
+            user_id: createId(),
+            amount: Math.floor(Math.random() * 10000),
+            tags_id: [createId()],
+            happen_at: faker.date.past().toISOString(),
+            kind: config.params.kind,
+        }))
+    return [200, createItem(10)]
 }
 export const mockTagShow: Mock = (config) => {
     const createTag = (attrs?: any) =>
@@ -39,11 +52,8 @@ export const mockTagShow: Mock = (config) => {
     })
     return [200, { resources: createTag() }]
 }
-const TagEdit: Mock = (config) => {
-    return [200, {
 
-    }]
-}
+
 
 export const mockTagIndex: Mock = (config) => {
     const { page, kind } = config.params

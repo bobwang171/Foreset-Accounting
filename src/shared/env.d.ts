@@ -33,8 +33,9 @@ type Resource<T> = {
 type Item = {
   id: number,
   user_id: number,
+  name:string,
   amount: number,
   tag_ids: number[],
-  happen_at: string,
+  happen_at:string,
   kind: expenses | income
 }

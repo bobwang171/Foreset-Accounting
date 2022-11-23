@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { mockItemCreate, mockSession, mockTagIndex, mockTagShow } from "../mock/mock";
+import { mockItemCreate, mockItemIndex, mockSession, mockTagIndex, mockTagShow } from "../mock/mock";
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
 type PostConfig = Omit<AxiosRequestConfig, 'url' | 'data' | 'method'>
@@ -49,7 +49,9 @@ const mock = (response: AxiosResponse) => {
         case "itemCreate":
             [response.status, response.data] = mockItemCreate(response.config)
             return true
-
+        case "itemIndex":
+            [response.status, response.data] = mockItemIndex(response.config)
+            return true
     }
     return false
 }
@@ -66,7 +68,7 @@ http.instance.interceptors.request.use(config => {
 
 http.instance.interceptors.response.use((response) => {
     //使用Axios拦截器篡改response
-    // mock(response)
+    mock(response)
     return response
 }, (error) => {
     if (mock(error.response)) {
