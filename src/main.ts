@@ -4,7 +4,6 @@ import { createRouter }  from 'vue-router'
 import { history } from './shared/history';
 import { routes } from './shared/routes';
 import "@svgstore";
-import { http } from './shared/Http';
 import { fetchMe, mePromise, } from './shared/me';
 
 

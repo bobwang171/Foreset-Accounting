@@ -23,11 +23,11 @@ export const mockItemCreate: Mock = (config) => {
         "deleted_at": null
     }]
 }
-
+faker.setLocale("zh_CN")
 
 export const mockSession: Mock = (config) => {
     return [200, {
-        jwt: faker.word.adverb
+        jwt: faker.lorem.word()
     }]
 
 }

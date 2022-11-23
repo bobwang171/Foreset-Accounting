@@ -48,17 +48,17 @@ export const SignIn = defineComponent({
 
             if (!hasError(newErrors)) {
                 const response = await http.post<{ jwt: string }>("/api/v1/session", formData,
-                    { params: { _mock: "session" } }).catch(onError)
+                    // { params: { _mock: "session" } }
+                )
+                    .catch(onError)
                 localStorage.setItem("jwt", response.data.jwt)
 
                 const returnTo = route?.query?.return_to?.toString()
                 refreshMe().then(() => {
                     if (returnTo) {
-                        router.push(returnTo)
+                        router.push(returnTo || "/")
                     }
-                    else {
-                        router.push("/")
-                    }
+
                 },
                     () => {
                         window.alert("登录失败")
