@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import { faker } from '@faker-js/faker';
+import dayjs from 'dayjs';
 type Mock = (config: AxiosRequestConfig) => [number, any]
 
 let id = 0
@@ -31,16 +32,36 @@ export const mockSession: Mock = (config) => {
 
 }
 export const mockItemIndex: Mock = (config) => {
+    const { kind, page } = config.params
+    const per_page = 25
+    const count = 26
+    const createPaper = (page = 1) => ({
+        page,
+        per_page,
+        count,
+    })
     const createItem = (n = 1, attrs?: any) =>
         Array.from({ length: n }).map(() => ({
             id: createId(),
+            name: faker.lorem.word(),
+            sign: faker.internet.emoji(),
             user_id: createId(),
             amount: Math.floor(Math.random() * 10000),
-            tags_id: [createId()],
-            happen_at: faker.date.past().toISOString(),
+            happen_at: dayjs().format("YYYY-MM-DD HH:MM"),
             kind: config.params.kind,
+
         }))
-    return [200, createItem(10)]
+    const createBody = (n = 1, attrs?: any) => ({
+        resources: createItem(n),
+        pager: createPaper(page),
+    })
+    if (!page || page === 1) {
+        return [200, createBody(25)]
+    } else if (page === 2) {
+        return [200, createBody(1)]
+    } else {
+        return [200, {}]
+    }
 }
 export const mockTagShow: Mock = (config) => {
     const createTag = (attrs?: any) =>
@@ -52,7 +73,17 @@ export const mockTagShow: Mock = (config) => {
     })
     return [200, { resources: createTag() }]
 }
-
+export const mockTagEdit: Mock = (config) => {
+    const createTag = (attrs?: any) =>
+    ({
+        id: createId(),
+        name: faker.lorem.word(),
+        sign: faker.internet.emoji(),
+        kind: "expenses",
+        ...attrs
+    })
+    return [200, { resources: createTag() }]
+}
 
 
 export const mockTagIndex: Mock = (config) => {

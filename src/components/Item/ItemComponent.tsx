@@ -1,14 +1,13 @@
-import { defineComponent, onMounted, PropType, reactive, ref } from 'vue';
+import { defineComponent, onMounted, ref, PropType } from 'vue';
 import s from './ItemComponent.module.scss'
-import dayjs, { Dayjs } from 'dayjs';
 import { http } from '../../shared/Http';
 export const ItemComponent = defineComponent({
   props: {
     startDate: {
-      type: Date
+      type: String as PropType<string>,
     },
     endDate: {
-      type: Date
+      type: String as PropType<string>,
     },
   },
   setup: (props, context) => {
@@ -17,8 +16,8 @@ export const ItemComponent = defineComponent({
     const page = ref(0)
     const fetchItems = async () => {
       const response = await http.get<Resources<Item>>('/api/v1/items', {
-        happen_after: props.startDate,
-        happen_before: props.endDate,
+        created_after: props.startDate,
+        created_before: props.endDate,
         page: page.value + 1,
         _mock: 'itemIndex',
       })
@@ -30,24 +29,26 @@ export const ItemComponent = defineComponent({
     onMounted(fetchItems)
     return () => (
       <div class={s.wrapper}>
-        {
-          items.value.map((item) =>
-            <>
-              <li>
-                <div class={s.icon} ><span>{item.tag_ids[0]}</span></div>
-                <div class={s.body}>
-                  <div class={s.name}>{item.id[0]}</div>
-                  <div class={s.date}>{item.happen_at}</div>
-                  <div class={s.amount}>{`￥${item.amount}`}</div>
-                </div>
-              </li>
-            </>
+        {items.value ? (
+          <>
+            <ol class={s.list}>
+              {items.value.map((item) => (
+                <li>
+                  <div class={s.sign}>
+                    <span>{item.sign}</span>
+                  </div>
+                  <div class={s.text}>
+                    <div class={s.tagAndAmount}>
+                      <span class={s.tag}>{item.name}</span>
+                      <span class={s.amount}>￥<>{item.amount}</></span>
+                    </div>
+                    <div class={s.time}>{item.happen_at}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
 
-
-
-          )}
-      </div>
-
-    )
+          </>
+        ) : (<div>记录为空</div>)} </div>)
   }
 })

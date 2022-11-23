@@ -4,6 +4,7 @@
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
 import { PropType } from 'vue';
+import dayjs from 'dayjs';
   const component: DefineComponent<{}, {}, any>
   export default component
 }
@@ -27,7 +28,7 @@ type Resources<T=any> = {
   }
 }
 type Resource<T> = {
-  resources: T
+  resource: T
 }
 
 type Item = {
@@ -35,7 +36,7 @@ type Item = {
   user_id: number,
   name:string,
   amount: number,
-  tag_ids: number[],
   happen_at:string,
-  kind: expenses | income
+  kind: expenses | income,
+  sign: string,
 }

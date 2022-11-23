@@ -30,7 +30,10 @@ export const TimeTabsLayout = defineComponent({
         const refOverlayVisible = ref(false);
         const refKind = ref("本月")
         const time = dayjs()
-        const customTime = reactive([dayjs(), dayjs()])
+        const customTime = reactive({
+            start: dayjs(),
+            end: dayjs()
+        })
         const onSubmitCustomTime = (e: Event) => {
             e.preventDefault()
             refOverlayVisible.value = false
