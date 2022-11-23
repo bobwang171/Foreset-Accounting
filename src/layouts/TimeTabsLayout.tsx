@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { Overlay } from 'vant';
-import { DefineComponent, defineComponent, PropType, reactive, ref, watch, watchEffect } from 'vue';
+import { defineComponent, PropType, reactive, ref, watch, watchEffect } from 'vue';
 import s from './TimeTabsLayout.module.scss'
 import { Form, FormItem } from '../shared/Form';
 import { OverlayIcon } from '../shared/Overlay';
@@ -56,7 +56,7 @@ export const TimeTabsLayout = defineComponent({
                         icon: () => <OverlayIcon />,
                         default: () =>
                             <>
-                                <Tabs selected={refKind.value} onUpdateSelected={(name: string) => refKind.value = name}>
+                                <Tabs v-model:selected={refKind.value} onUpdate:selected={() => refOverlayVisible.value = true}>
                                     <Tab name='本月'>
                                         <props.component
                                             startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
@@ -69,7 +69,7 @@ export const TimeTabsLayout = defineComponent({
                                         <props.component
                                             startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                                     </Tab>
-                                    <Tab name='自定义'>
+                                    <Tab name='自定义' >
                                         <props.component
                                             startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                                         <Overlay show={refOverlayVisible.value} >
