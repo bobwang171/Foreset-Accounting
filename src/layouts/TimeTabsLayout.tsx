@@ -30,13 +30,23 @@ export const TimeTabsLayout = defineComponent({
         const refOverlayVisible = ref(false);
         const refKind = ref("本月")
         const time = dayjs()
-        const customTime = reactive({
-            start: dayjs(),
-            end: dayjs()
+        const temptTime = reactive({
+            start: dayjs().format("YYYY-MM-DD"),
+            end: dayjs().format("YYYY-MM-DD")
         })
+        const customTime = reactive<{
+            start: string,
+            end: string
+        }>({
+            start: undefined,
+            end: undefined
+        })
+
         const onSubmitCustomTime = (e: Event) => {
             e.preventDefault()
+            Object.assign(customTime, temptTime)
             refOverlayVisible.value = false
+
         }
         const timeList = [
             [time.startOf("month"), time.endOf("month")],
@@ -74,19 +84,20 @@ export const TimeTabsLayout = defineComponent({
                                     </Tab>
                                     <Tab name='自定义' >
                                         <props.component
-                                            startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
+                                            startDate={customTime.start}
+                                            endDate={customTime.end} />
                                         <Overlay show={refOverlayVisible.value} >
                                             <div class={s.wrapper}>
                                                 <div class={s.block}>
                                                     <header><span>请选择时间</span></header>
                                                     <Form onSubmit={onSubmitCustomTime}>
-                                                        <FormItem type='date' label='起始时间' v-model={customTime[0]} />
+                                                        <FormItem type='date' label='起始时间' v-model={temptTime.start} />
 
-                                                        <FormItem type='date' label='终止时间' v-model={customTime[1]} />
+                                                        <FormItem type='date' label='终止时间' v-model={temptTime.end} />
 
                                                         <div class={s.button_wrapper}>
                                                             <button class={s.cancel} type="button" onClick={() => { refOverlayVisible.value = false }}>取消</button>
-                                                            <button class={s.confirm} type="submit">确定</button>
+                                                            <button class={s.confirm} type="submit" onClick={onSubmitCustomTime}>确定</button>
                                                         </div>
                                                     </Form>
 
