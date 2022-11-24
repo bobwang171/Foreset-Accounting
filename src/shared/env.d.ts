@@ -40,3 +40,7 @@ type Item = {
   kind: expenses | income,
   sign: string,
 }
+type User = {
+  id: number,
+  email:string
+}

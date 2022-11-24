@@ -56,7 +56,7 @@ export const SignIn = defineComponent({
                 const returnTo = route?.query?.return_to?.toString()
                 refreshMe().then(() => {
                     if (returnTo) {
-                        router.push(returnTo || "/")
+                        router.push(returnTo || "/start")
                     }
 
                 },
