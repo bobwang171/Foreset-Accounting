@@ -24,6 +24,10 @@ export const TimeTabsLayout = defineComponent({
         component: {
             type: Object as PropType<typeof demo>,
             required: true
+        },
+        rerender: {
+            type: Boolean,
+            default: false
         }
     },
     setup: (props, context) => {
@@ -69,7 +73,8 @@ export const TimeTabsLayout = defineComponent({
                         icon: () => <OverlayIcon />,
                         default: () =>
                             <>
-                                <Tabs v-model:selected={refKind.value} onUpdate:selected={() => refOverlayVisible.value = true}>
+                                <Tabs v-model:selected={refKind.value} onUpdate:selected={() => refOverlayVisible.value = true}
+                                    rerender={props.rerender}>
                                     <Tab name='本月'>
                                         <props.component
                                             startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />

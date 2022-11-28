@@ -2,7 +2,6 @@ import { defineComponent, onMounted, PropType, ref } from 'vue';
 import s from './Overlay.module.scss'
 import { Icon } from './icon';
 import { RouterLink, useRoute, useRouter } from 'vue-router';
-import { http } from './Http';
 import { mePromise } from './me';
 import { Dialog } from 'vant';
 export const Overlay = defineComponent({
@@ -56,20 +55,24 @@ export const Overlay = defineComponent({
                 <nav class={s.main}>
                     <ul >
                         <li>
-                            <Icon name='statistics'></Icon>
-                            <span>统计图表</span>
+
+                            <RouterLink to={`/statistics`}>
+                                <Icon name='statistics'></Icon>
+                                <span>统计图表</span>
+                            </RouterLink>
                         </li>
                         <li>
-                            <Icon name='export'></Icon>
-                            <span>导出数据</span>
+                            <RouterLink to={`/statistics`}>
+                                <Icon name='export'></Icon>
+                                <span>导出数据</span>
+                            </RouterLink>
                         </li>
+
                         <li>
-                            <Icon name='classify'></Icon>
-                            <span>自定义分类</span>
-                        </li>
-                        <li>
-                            <Icon name='notice'></Icon>
-                            <span>记账提醒</span>
+                            <RouterLink to={`/statistics`}>
+                                <Icon name='notice'></Icon>
+                                <span>记账提醒</span>
+                            </RouterLink>
                         </li>
                     </ul>
                 </nav>

@@ -55,17 +55,18 @@
     background: white;
 
     >ul {
-        margin: 20px 0 20px 0;
+        padding: 20px 0 20px 0;
         font-size: 20px;
 
         >li {
             margin: 20px;
 
-            >span {
-                position: relative;
-                bottom: 3px;
-                margin: 15px;
-
+            >a {
+                >span {
+                    position: relative;
+                    bottom: 3px;
+                    padding: 15px;
+                }
             }
         }
     }

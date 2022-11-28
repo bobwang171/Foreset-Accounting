@@ -25,7 +25,7 @@ export const Charts = defineComponent({
         const option = {
             grid: [{ top: 20, left: 40, bottom: 20 }],
             xAxis: {
-                type: 'kind',
+                type: 'category',
                 data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
             },
             yAxis: {
@@ -64,19 +64,20 @@ export const Charts = defineComponent({
 
 
         }
+
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(pieChart.value);
             // 绘制图表
             myChart.setOption(option2);
         })
-
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
             var myChart = echarts.init(lineChart.value);
             // 绘制图表
             myChart.setOption(option);
         })
+
         const barData = reactive([
             { tag: { id: 1, name: "房租", sign: "addTag" }, amount: 3000 },
             { tag: { id: 2, name: "吃饭", sign: "addTag" }, amount: 1000 },
