@@ -16,6 +16,26 @@ export const mockItemIndexBalance: Mock = (config) => {
     }]
 }
 
+export const mockItemSummary: Mock = (config) => {
+    return [200, {
+        "groups": [
+            {
+                "happen_at": "2018-06-18",
+                "amount": 300
+            },
+            {
+                "happen_at": "2018-06-19",
+                "amount": 200
+            },
+            {
+                "happen_at": "2018-06-20",
+                "amount": 100
+            }
+        ],
+        "total": 600
+    }]
+}
+
 export const mockItemCreate: Mock = (config) => {
     return [200, {
         "id": 16443,

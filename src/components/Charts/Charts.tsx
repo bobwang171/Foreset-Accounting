@@ -1,14 +1,16 @@
-import { computed, defineComponent, onMounted, PropType, reactive, ref } from 'vue';
+import { computed, defineComponent, onMounted, PropType, reactive, ref, watch } from 'vue';
 import s from './Charts.module.scss'
 import { FormItem } from '../../shared/Form';
 import * as echarts from 'echarts';
 import { Icon } from '../../shared/icon';
 import { getMoney } from '../../shared/Money';
 import dayjs from 'dayjs';
-
-
+import { http } from '../../shared/Http';
+type Data1Item = { happen_at: string, amount: number }
+type Data1 = Data1Item[]
 
 export const Charts = defineComponent({
+
     props: {
         startDate: {
             type: String as PropType<string>,
@@ -23,39 +25,7 @@ export const Charts = defineComponent({
         const lineChart = ref<HTMLDivElement>()
         const pieChart = ref<HTMLDivElement>()
         const kind = ref("expenses")
-        const lineData = [
-            ['2018-01-01T00:00:00.000+0800', 150],
-            ['2018-01-02T00:00:00.000+0800', 230],
-            ['2018-01-03T00:00:00.000+0800', 224],
-            ['2018-01-04T00:00:00.000+0800', 218],
-            ['2018-01-05T00:00:00.000+0800', 135],
-            ['2018-01-06T00:00:00.000+0800', 147],
-            ['2018-01-07T00:00:00.000+0800', 260],
-            ['2018-01-08T00:00:00.000+0800', 300],
-            ['2018-01-09T00:00:00.000+0800', 200],
-            ['2018-01-10T00:00:00.000+0800', 300],
-            ['2018-01-11T00:00:00.000+0800', 400],
-            ['2018-01-12T00:00:00.000+0800', 500],
-            ['2018-01-13T00:00:00.000+0800', 400],
-            ['2018-01-14T00:00:00.000+0800', 300],
-            ['2018-01-15T00:00:00.000+0800', 200],
-            ['2018-01-16T00:00:00.000+0800', 100],
-            ['2018-01-17T00:00:00.000+0800', 200],
-            ['2018-01-18T00:00:00.000+0800', 300],
-            ['2018-01-19T00:00:00.000+0800', 400],
-            ['2018-01-20T00:00:00.000+0800', 500],
-            ['2018-01-21T00:00:00.000+0800', 600],
-            ['2018-01-22T00:00:00.000+0800', 700],
-            ['2018-01-23T00:00:00.000+0800', 800],
-            ['2018-01-24T00:00:00.000+0800', 900],
-            ['2018-01-25T00:00:00.000+0800', 1000],
-            ['2018-01-26T00:00:00.000+0800', 1100],
-            ['2018-01-27T00:00:00.000+0800', 1200],
-            ['2018-01-28T00:00:00.000+0800', 1300],
-            ['2018-01-29T00:00:00.000+0800', 1400],
-            ['2018-01-30T00:00:00.000+0800', 1500],
-            ['2018-01-31T00:00:00.000+0800', 1600],
-        ]
+
         const echartsOption = {
             tooltip: {
                 show: true,
@@ -114,23 +84,45 @@ export const Charts = defineComponent({
                 }
             ]
         }
+        const data1 = ref<Data1>([])
+        const betterData1 = computed(() =>
+            data1.value.map(item => [item.happen_at, item.amount])
+        )
+        console.log(betterData1)
+        const refCharts = ref<echarts.ECharts>()
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(pieChart.value);
+            refCharts.value = echarts.init(pieChart.value);
             // 绘制图表
-            myChart.setOption(pieOption);
+            refCharts.value.setOption(pieOption);
+        })
+        onMounted(async () => {
+            const response = await http.get<{ groups: Data1, total: number }>('/api/v1/items/summary', {
+                _mock: "itemSummary"
+            })
+            data1.value = response.data.groups
+
+            // console.log(`response.date:${response.data}`)
         })
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(lineChart.value);
+            refCharts.value = echarts.init(lineChart.value);
             // 绘制图表
-            myChart.setOption({
+            refCharts.value.setOption({
                 ...echartsOption,
                 series: [{
-                    data: lineData,
+                    data: betterData1.value,
                     type: 'line'
                 }]
             });
+        })
+        watch(() => betterData1.value, () => {
+            refCharts.value.setOption({
+                series: [{
+                    data: betterData1.value,
+                    type: 'line'
+                }],
+            })
         })
 
 
