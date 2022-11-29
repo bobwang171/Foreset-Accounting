@@ -20,15 +20,15 @@ export const mockItemSummary: Mock = (config) => {
     return [200, {
         "groups": [
             {
-                "happen_at": "2018-06-18",
+                "happen_at": "2022-11-18",
                 "amount": 300
             },
             {
-                "happen_at": "2018-06-19",
+                "happen_at": "2022-11-19",
                 "amount": 200
             },
             {
-                "happen_at": "2018-06-20",
+                "happen_at": "2022-11-20",
                 "amount": 100
             }
         ],

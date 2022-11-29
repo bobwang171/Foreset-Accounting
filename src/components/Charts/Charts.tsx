@@ -85,10 +85,23 @@ export const Charts = defineComponent({
             ]
         }
         const data1 = ref<Data1>([])
-        const betterData1 = computed(() =>
-            data1.value.map(item => [item.happen_at, item.amount])
+        const betterData1 = computed(() => {
+            const array = []
+            const dateGap = dayjs(props.endDate).diff(props.startDate, "day") + 1
+            let data1Index = 0
+            for (let i = 0; i < dateGap; i++) {
+                const time = dayjs(props.startDate).add(i, "day").unix()
+                if (data1.value[data1Index] && dayjs(data1.value[data1Index].happen_at).unix() === time) {
+                    array.push([dayjs(time).toISOString(), data1.value[data1Index].amount])
+                    data1Index += 1
+                } else {
+                    array.push([dayjs(time).toISOString(), 0])
+                }
+
+            }
+            return array
+        }
         )
-        console.log(betterData1)
         const refCharts = ref<echarts.ECharts>()
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
@@ -117,7 +130,7 @@ export const Charts = defineComponent({
             });
         })
         watch(() => betterData1.value, () => {
-            refCharts.value.setOption({
+            refCharts?.value?.setOption({
                 series: [{
                     data: betterData1.value,
                     type: 'line'
