@@ -36,7 +36,7 @@ export const Charts = defineComponent({
                 },
             },
 
-            grid: [{ left: 16, top: 20, right: 16, bottom: 20 }],
+            grid: [{ left: 20, top: 24, right: 20, bottom: 24 }],
             xAxis: {
                 type: 'time',
                 boundaryGap: ['3%', '0%'],
@@ -90,8 +90,8 @@ export const Charts = defineComponent({
             const dateGap = dayjs(props.endDate).diff(props.startDate, "day") + 1
             let data1Index = 0
             for (let i = 0; i < dateGap; i++) {
-                const time = dayjs(props.startDate).add(i, "day").unix()
-                if (data1.value[data1Index] && dayjs(data1.value[data1Index].happen_at).unix() === time) {
+                const time = dayjs(props.startDate).add(i, "day").valueOf()
+                if (data1.value[data1Index] && dayjs(data1.value[data1Index].happen_at).valueOf() === time) {
                     array.push([dayjs(time).toISOString(), data1.value[data1Index].amount])
                     data1Index += 1
                 } else {
