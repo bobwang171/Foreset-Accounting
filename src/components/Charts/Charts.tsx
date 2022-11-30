@@ -7,7 +7,9 @@ import { getMoney } from '../../shared/Money';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
 type Data1Item = { happen_at: string, amount: number }
+type Data2Item = { tag_id: number, tag: Tag, amount: number }
 type Data1 = Data1Item[]
+type Data2 = Data2Item[]
 
 export const Charts = defineComponent({
 
@@ -26,7 +28,7 @@ export const Charts = defineComponent({
         const pieChart = ref<HTMLDivElement>()
         const kind = ref("expenses")
 
-        const echartsOption = {
+        const lineChartOption = {
             tooltip: {
                 show: true,
                 trigger: 'axis',
@@ -62,18 +64,16 @@ export const Charts = defineComponent({
             },
         };
         const pieOption = {
+            tooltip: {
+                trigger: "item",
+                formatter: ({ name, value, percent }: { name: string, value: number, percent: number }) => {
+                    return `${name}  ￥${getMoney(value)}  (${percent}%)`
+                }
+            },
             series: [
                 {
-                    name: 'Access From',
                     type: 'pie',
-                    radius: '50%',
-                    data: [
-                        { value: 1048, name: 'Search Engine' },
-                        { value: 735, name: 'Direct' },
-                        { value: 580, name: 'Email' },
-                        { value: 484, name: 'Union Ads' },
-                        { value: 300, name: 'Video Ads' }
-                    ],
+                    radius: '70%',
                     emphasis: {
                         itemStyle: {
                             shadowBlur: 10,
@@ -85,6 +85,7 @@ export const Charts = defineComponent({
             ]
         }
         const data1 = ref<Data1>([])
+        const data2 = ref<Data2>([])
         const betterData1 = computed(() => {
             const array = []
             const dateGap = dayjs(props.endDate).diff(props.startDate, "day") + 1
@@ -102,27 +103,47 @@ export const Charts = defineComponent({
             return array
         }
         )
-        const refCharts = ref<echarts.ECharts>()
-        onMounted(() => {
-            // 基于准备好的dom，初始化echarts实例
-            refCharts.value = echarts.init(pieChart.value);
-            // 绘制图表
-            refCharts.value.setOption(pieOption);
-        })
+        const betterData2 = computed<{ name: string, value: number }[]>(() =>
+            data2.value.map(item => ({
+                name: item.tag.name,
+                value: item.amount
+            }))
+        )
+        const refLineCharts = ref<echarts.ECharts>()
+        const refPieCharts = ref<echarts.ECharts>()
+
+
+
         onMounted(async () => {
             const response = await http.get<{ groups: Data1, total: number }>('/api/v1/items/summary', {
+                create_after: props.startDate,
+                created_before: props.endDate,
+                group_by: "happen_at",
                 _mock: "itemSummary"
             })
             data1.value = response.data.groups
-
-            // console.log(`response.date:${response.data}`)
+        })
+        onMounted(async () => {
+            const response = await http.get<{ groups: Data2, total: number }>("/api/v1/items/summary", {
+                create_after: props.startDate,
+                created_before: props.endDate,
+                group_by: "tag_id",
+                _mock: "itemSummary"
+            })
+            data2.value = response.data.groups
         })
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
-            refCharts.value = echarts.init(lineChart.value);
+            refPieCharts.value = echarts.init(pieChart.value);
             // 绘制图表
-            refCharts.value.setOption({
-                ...echartsOption,
+            refPieCharts.value.setOption(pieOption);
+        })
+        onMounted(() => {
+            // 基于准备好的dom，初始化echarts实例
+            refLineCharts.value = echarts.init(lineChart.value);
+            // 绘制图表
+            refLineCharts.value.setOption({
+                ...lineChartOption,
                 series: [{
                     data: betterData1.value,
                     type: 'line'
@@ -130,11 +151,19 @@ export const Charts = defineComponent({
             });
         })
         watch(() => betterData1.value, () => {
-            refCharts?.value?.setOption({
+            refLineCharts?.value?.setOption({
                 series: [{
                     data: betterData1.value,
                     type: 'line'
                 }],
+            })
+        })
+        watch(() => betterData2.value, () => {
+            refPieCharts.value.setOption({
+                series: [{
+                    data: betterData2.value,
+                    type: "pie"
+                }]
             })
         })
 
@@ -145,7 +174,7 @@ export const Charts = defineComponent({
             { tag: { id: 3, name: "娱乐", sign: "addTag" }, amount: 2000 }
         ])
 
-        const BetterData = computed(() => {
+        const betterData = computed(() => {
             const total = barData.reduce((sum, item) => sum + item.amount, 0)
             return barData.map(item => ({
                 ...item,
@@ -163,7 +192,7 @@ export const Charts = defineComponent({
                 <div class={s.pieChart} ref={pieChart}></div>
                 <div class={s.barChart}>
                     {
-                        BetterData.value.map(({ tag, amount, percentage }) => {
+                        betterData.value.map(({ tag, amount, percentage }) => {
                             return (
                                 <div class={s.wrapper}>
 

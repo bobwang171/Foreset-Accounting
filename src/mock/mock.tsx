@@ -17,23 +17,73 @@ export const mockItemIndexBalance: Mock = (config) => {
 }
 
 export const mockItemSummary: Mock = (config) => {
-    return [200, {
-        "groups": [
-            {
-                "happen_at": "2022-11-18",
-                "amount": 300
-            },
-            {
-                "happen_at": "2022-11-19",
-                "amount": 200
-            },
-            {
-                "happen_at": "2022-11-20",
-                "amount": 100
-            }
-        ],
-        "total": 600
-    }]
+    if (config.params.group_by === "happen_at") {
+        return [200, {
+            "groups": [
+                {
+                    "happen_at": "2022-11-18",
+                    "amount": 300
+                },
+                {
+                    "happen_at": "2022-11-19",
+                    "amount": 200
+                },
+                {
+                    "happen_at": "2022-11-20",
+                    "amount": 100
+                }
+            ],
+            "total": 600
+        }]
+    } else {
+        return [200, {
+            "groups": [
+                {
+                    "tag_id": 27747,
+                    "tag": {
+                        "id": 27747,
+                        "user_id": 10257,
+                        "name": "Tem.",
+                        "sign": "😡",
+                        "deleted_at": null,
+                        "created_at": "2022-11-24T18:04:35.332+08:00",
+                        "updated_at": "2022-11-24T18:04:35.332+08:00",
+                        "kind": "expenses"
+                    },
+                    "amount": 500
+                },
+                {
+                    "tag_id": 27745,
+                    "tag": {
+                        "id": 27745,
+                        "user_id": 10257,
+                        "name": "Con.",
+                        "sign": "❤",
+                        "deleted_at": null,
+                        "created_at": "2022-11-24T18:04:35.320+08:00",
+                        "updated_at": "2022-11-24T18:04:35.320+08:00",
+                        "kind": "expenses"
+                    },
+                    "amount": 400
+                },
+                {
+                    "tag_id": 27746,
+                    "tag": {
+                        "id": 27746,
+                        "user_id": 10257,
+                        "name": "Qui.",
+                        "sign": "❤",
+                        "deleted_at": null,
+                        "created_at": "2022-11-24T18:04:35.329+08:00",
+                        "updated_at": "2022-11-24T18:04:35.329+08:00",
+                        "kind": "expenses"
+                    },
+                    "amount": 300
+                }
+            ],
+            "total": 600
+        }]
+    }
 }
 
 export const mockItemCreate: Mock = (config) => {
