@@ -3,7 +3,7 @@ import s from './Charts.module.scss'
 import { FormItem } from '../../shared/Form';
 import * as echarts from 'echarts';
 import { Icon } from '../../shared/icon';
-import { getMoney } from '../../shared/Money';
+import { getMoney, Money } from '../../shared/Money';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
 type Data1Item = { happen_at: string, amount: number }
@@ -35,9 +35,9 @@ export const Charts = defineComponent({
                 formatter: ([item]: any) => {
                     const [x, y] = item.data
                     return `${dayjs(x).format('YYYY年MM月DD日')} ￥${getMoney(y)}`
+
                 },
             },
-
             grid: [{ left: 20, top: 24, right: 20, bottom: 24 }],
             xAxis: {
                 type: 'time',
@@ -103,35 +103,54 @@ export const Charts = defineComponent({
             return array
         }
         )
+        let lineCharts: echarts.ECharts | undefined = undefined   //为了保证Echarts的tooltips正常显示，这里把ref改为let
+        const refPieCharts = ref<echarts.ECharts>()
+
+
+
+        const betterData = computed(() => {
+            const total = barData.reduce((sum, item) => sum + item.amount, 0)
+            return barData.map(item => ({
+                ...item,
+                percent: Math.round(item.amount / total * 100)
+            }))
+        })
         const betterData2 = computed<{ name: string, value: number }[]>(() =>
             data2.value.map(item => ({
                 name: item.tag.name,
                 value: item.amount
             }))
         )
-        const refLineCharts = ref<echarts.ECharts>()
-        const refPieCharts = ref<echarts.ECharts>()
-
-
-
-        onMounted(async () => {
+        const fetchData1 = async () => {
             const response = await http.get<{ groups: Data1, total: number }>('/api/v1/items/summary', {
                 create_after: props.startDate,
                 created_before: props.endDate,
                 group_by: "happen_at",
+                kind: kind.value,
                 _mock: "itemSummary"
             })
             data1.value = response.data.groups
-        })
-        onMounted(async () => {
+        }
+        const fetchData2 = async () => {
             const response = await http.get<{ groups: Data2, total: number }>("/api/v1/items/summary", {
                 create_after: props.startDate,
                 created_before: props.endDate,
                 group_by: "tag_id",
+                kind: kind.value,
                 _mock: "itemSummary"
             })
             data2.value = response.data.groups
-        })
+        }
+        onMounted(fetchData1)
+        watch(
+            () => kind.value,
+            () => fetchData1()
+        )
+        onMounted(fetchData2)
+        watch(
+            () => kind.value,
+            () => fetchData2()
+        )
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
             refPieCharts.value = echarts.init(pieChart.value);
@@ -140,18 +159,12 @@ export const Charts = defineComponent({
         })
         onMounted(() => {
             // 基于准备好的dom，初始化echarts实例
-            refLineCharts.value = echarts.init(lineChart.value);
+            lineCharts = echarts.init(lineChart.value);
             // 绘制图表
-            refLineCharts.value.setOption({
-                ...lineChartOption,
-                series: [{
-                    data: betterData1.value,
-                    type: 'line'
-                }]
-            });
+            lineCharts.setOption(lineChartOption);
         })
         watch(() => betterData1.value, () => {
-            refLineCharts?.value?.setOption({
+            lineCharts.setOption({
                 series: [{
                     data: betterData1.value,
                     type: 'line'
@@ -174,25 +187,20 @@ export const Charts = defineComponent({
             { tag: { id: 3, name: "娱乐", sign: "addTag" }, amount: 2000 }
         ])
 
-        const betterData = computed(() => {
-            const total = barData.reduce((sum, item) => sum + item.amount, 0)
-            return barData.map(item => ({
-                ...item,
-                percentage: Math.round(item.amount / total * 100) + "%"
-            }))
-        })
+
         return () => (
             <div class={s.wrapper}>
                 <FormItem label='类型' type='select' options={[
                     { value: "expenses", text: "支出" },
                     { value: "income", text: "收入" }
                 ]} v-model={kind.value} />
+                {kind.value}
 
                 <div class={s.lineChart} ref={lineChart}></div>
                 <div class={s.pieChart} ref={pieChart}></div>
                 <div class={s.barChart}>
                     {
-                        betterData.value.map(({ tag, amount, percentage }) => {
+                        betterData.value.map(({ tag, amount, percent }) => {
                             return (
                                 <div class={s.wrapper}>
 
@@ -201,11 +209,17 @@ export const Charts = defineComponent({
                                     <div class={s.body}>
                                         <div class={s.nameAndAmount}>
                                             <div class={s.name}>
-                                                <span>{tag.name} - {percentage}</span>
+                                                <span>{tag.name} - {percent}%</span>
                                             </div>
-                                            <div class={s.amount}>{amount}</div>
+                                            <span class={s.amount}>
+                                                <Money value={amount}></Money>
+                                            </span>
                                         </div>
-                                        <div class={s.bar}></div>
+
+                                        <div class={s.bar}>
+                                            <div class={s.bar_inner} style={{ width: `${percent}%` }}></div>
+                                        </div>
+
                                     </div>
                                 </div>
                             )

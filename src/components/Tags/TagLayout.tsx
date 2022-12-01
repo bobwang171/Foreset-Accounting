@@ -32,7 +32,7 @@ export const TagLayout = defineComponent({
                 }
                 )
                 console.log(response)
-                Object.assign(formData, response.data.resources)
+                Object.assign(formData, response.data.resource)
             } else {
                 return
             }

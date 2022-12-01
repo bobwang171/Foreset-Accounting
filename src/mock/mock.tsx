@@ -17,71 +17,63 @@ export const mockItemIndexBalance: Mock = (config) => {
 }
 
 export const mockItemSummary: Mock = (config) => {
-    if (config.params.group_by === "happen_at") {
+    if (config.params.group_by === "happen_at" && config.params.kind === "expenses") {
         return [200, {
             "groups": [
                 {
-                    "happen_at": "2022-11-18",
+                    "happen_at": "2022-12-18",
                     "amount": 300
                 },
                 {
-                    "happen_at": "2022-11-19",
+                    "happen_at": "2022-12-19",
                     "amount": 200
                 },
                 {
-                    "happen_at": "2022-11-20",
+                    "happen_at": "2022-12-20",
                     "amount": 100
                 }
             ],
             "total": 600
         }]
-    } else {
+    } else if (config.params.group_by === "happen_at" && config.params.kind === "income") {
         return [200, {
             "groups": [
                 {
-                    "tag_id": 27747,
-                    "tag": {
-                        "id": 27747,
-                        "user_id": 10257,
-                        "name": "Tem.",
-                        "sign": "😡",
-                        "deleted_at": null,
-                        "created_at": "2022-11-24T18:04:35.332+08:00",
-                        "updated_at": "2022-11-24T18:04:35.332+08:00",
-                        "kind": "expenses"
-                    },
-                    "amount": 500
-                },
-                {
-                    "tag_id": 27745,
-                    "tag": {
-                        "id": 27745,
-                        "user_id": 10257,
-                        "name": "Con.",
-                        "sign": "❤",
-                        "deleted_at": null,
-                        "created_at": "2022-11-24T18:04:35.320+08:00",
-                        "updated_at": "2022-11-24T18:04:35.320+08:00",
-                        "kind": "expenses"
-                    },
+                    "happen_at": "2022-12-18",
                     "amount": 400
                 },
                 {
-                    "tag_id": 27746,
-                    "tag": {
-                        "id": 27746,
-                        "user_id": 10257,
-                        "name": "Qui.",
-                        "sign": "❤",
-                        "deleted_at": null,
-                        "created_at": "2022-11-24T18:04:35.329+08:00",
-                        "updated_at": "2022-11-24T18:04:35.329+08:00",
-                        "kind": "expenses"
-                    },
-                    "amount": 300
+                    "happen_at": "2022-12-19",
+                    "amount": 600
+                },
+                {
+                    "happen_at": "2022-12-20",
+                    "amount": 200
                 }
             ],
+            "total": 1200
+        }]
+    }
+    else if (config.params.group_by === "tag_id" && config.params.kind === "expenses") {
+
+        return [200, {
+            "groups": [
+                { tag_id: 1, tag: { id: 1, name: "交通", sign: faker.internet.emoji() }, amount: 200 },
+                { tag_id: 2, tag: { id: 2, name: "餐饮", sign: faker.internet.emoji() }, amount: 300 },
+                { tag_id: 3, tag: { id: 3, name: "娱乐", sign: faker.internet.emoji() }, amount: 100 }
+            ],
             "total": 600
+        }]
+    }
+    else if (config.params.group_by === "tag_id" && config.params.kind === "income") {
+
+        return [200, {
+            "groups": [
+                { tag_id: 1, tag: { id: 1, name: "交通", sign: faker.internet.emoji() }, amount: 400 },
+                { tag_id: 2, tag: { id: 2, name: "餐饮", sign: faker.internet.emoji() }, amount: 100 },
+                { tag_id: 3, tag: { id: 3, name: "娱乐", sign: faker.internet.emoji() }, amount: 600 }
+            ],
+            "total": 1100
         }]
     }
 }
