@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { Toast } from "vant";
 import { mockItemCreate, mockItemIndex, mockItemIndexBalance, mockItemSummary, mockSession, mockTagIndex, mockTagShow } from "../mock/mock";
 
 type GetConfig = Omit<AxiosRequestConfig, 'params' | 'url' | 'method'>
@@ -34,9 +35,6 @@ const mock = (response: AxiosResponse) => {
         return false
     }
     switch (response.config?.params?._mock) {
-        case 'session':
-            [response.status, response.data] = mockSession(response.config)
-            return true
 
         case "tagShow":
             [response.status, response.data] = mockTagShow(response.config)
@@ -68,8 +66,24 @@ http.instance.interceptors.request.use(config => {
     if (jwt) {
         config.headers!.Authorization = `Bearer ${jwt}`
     }
+    if (config?.params?._autoLoading === true) {
+        Toast.loading({
+            message: '加载中...',
+            forbidClick: true,
+            duration: 0
+        });
+    }
     return config
 })
+http.instance.interceptors.response.use((response) => {
+    Toast.clear()
+    return response
+},
+    (error) => {
+        Toast.clear()
+        throw error
+    })
+
 
 http.instance.interceptors.response.use((response) => {
     //使用Axios拦截器篡改response

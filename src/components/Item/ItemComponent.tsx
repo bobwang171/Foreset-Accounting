@@ -22,6 +22,7 @@ export const ItemComponent = defineComponent({
         created_before: props.endDate,
         page: page.value + 1,
         _mock: 'itemIndex',
+        _autoLoading: true
       })
       const { resources, pager } = response.data
       items.value?.push(...resources)

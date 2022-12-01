@@ -52,11 +52,11 @@ export const TagLayout = defineComponent({
             if (!hasError(errors)) {
                 const promise = await formData.id ?
                     await http.patch(`/api/v1/tags/${formData.id}`, formData,
-                        { params: { _mock: "tagEdit" } }
+                        { params: { _mock: "tagEdit", _autoLoading: true } }
                     ).catch(onError)
                     :
                     await http.post("/api/v1/tags", formData,
-                        { params: { _mock: "tagCreate" } }).catch(onError)
+                        { params: { _mock: "tagCreate", _autoLoading: true } }).catch(onError)
                 router.back()
             }
         }
@@ -81,7 +81,7 @@ export const TagLayout = defineComponent({
                                 <span>{errors["sign"] ? errors["sign"][0] : "　"}</span>
                             </div>
                             <div class={s.formItem_value}>
-                                <div class={[s.formItem, s.emojiList, s.error]}>
+                                <div class={[s.formItem, s.emojiList]}>
                                     <EmojiSelect v-model={formData.sign} />
                                 </div>
                             </div>

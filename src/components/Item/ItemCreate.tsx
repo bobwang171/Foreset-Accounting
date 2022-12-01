@@ -1,6 +1,5 @@
 import { defineComponent, onMounted, PropType, ref, reactive } from 'vue';
 import { MainLayout } from '../../layouts/MainLayout';
-import { Icon } from '../../shared/Icon';
 import { Tabs, Tab } from '../../shared/Tabs';
 import s from './ItemCreate.module.scss';
 import { Tags } from './Tags';
@@ -23,7 +22,7 @@ export const ItemCreate = defineComponent({
 
     })
     const onSubmit = async () => {
-      const response = await http.post<Resource<Item>>("/api/v1/items", formData, { params: { _mock: "itemCreate" } })
+      await http.post<Resource<Item>>("/api/v1/items", formData, { params: { _mock: "itemCreate", _autoLoading: true } })
     }
 
     return () => (

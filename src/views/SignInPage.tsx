@@ -9,6 +9,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { http } from '../shared/Http';
 import { refreshMe } from '../shared/me';
 import { BackIcon } from '../shared/BackIcon';
+import { Toast } from 'vant';
 export const SignIn = defineComponent({
     props: {
         countFrom: {
@@ -41,6 +42,7 @@ export const SignIn = defineComponent({
             Object.assign(errors, newErrors)
             const onError = (error: any) => {
                 if (error.response.data.errors === "422") {
+                    debugger
                     Object.assign(errors, error.response.data.errors)
                 }
                 throw error
@@ -48,7 +50,7 @@ export const SignIn = defineComponent({
 
             if (!hasError(newErrors)) {
                 const response = await http.post<{ jwt: string }>("/api/v1/session", formData,
-                    // { params: { _mock: "session" } }
+                    // { params: { x: "session" } }
                 )
                     .catch(onError)
                 localStorage.setItem("jwt", response.data.jwt)
@@ -69,8 +71,7 @@ export const SignIn = defineComponent({
         }
 
         const onClickSendCertificationCode = async () => {
-            const response = await http.post("/api/v1/validation_codes", { email: formData.email })
-
+            await http.post("/api/v1/validation_codes", { email: formData.email }, { params: { _autoLoading: true } })
         }
         const timer = ref<number>()
         const count = ref<number>(props.countFrom)

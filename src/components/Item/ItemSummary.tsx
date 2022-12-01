@@ -35,8 +35,8 @@ export const ItemSummary = defineComponent({
           <div class={s.itemList}>
             <ItemComponent startDate={props.startDate} endDate={props.endDate} />
           </div>
-          <Form>
-          </Form>
+          <Form />
+          <span class={s.noMore}>没有更多</span>
           <FloatButton iconName='add' />
         </div>
       </>

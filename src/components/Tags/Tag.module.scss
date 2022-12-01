@@ -30,28 +30,14 @@ button {
     height: 35px;
     box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
 
-    &.error {
-      border-color: #E10505;
-    }
   }
 
   &.emojiList {
     flex-grow: 1;
-    border: 1px solid #5c33be;
+    // border: 1px solid #5c33be;
     border-radius: 8px;
     font-size: 18px;
     font-size: 14px;
-
-    &.error {
-      border-color: #E10505;
-    }
-
-    &.select {
-      border: 1px solid #5c33be;
-      border-radius: 8px;
-      padding: 0 8px;
-
-    }
 
     >nav {
       display: flex;

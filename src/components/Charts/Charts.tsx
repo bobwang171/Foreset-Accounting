@@ -127,7 +127,8 @@ export const Charts = defineComponent({
                 created_before: props.endDate,
                 group_by: "happen_at",
                 kind: kind.value,
-                _mock: "itemSummary"
+                _mock: "itemSummary",
+                _autoLoading: true
             })
             data1.value = response.data.groups
         }
@@ -137,7 +138,8 @@ export const Charts = defineComponent({
                 created_before: props.endDate,
                 group_by: "tag_id",
                 kind: kind.value,
-                _mock: "itemSummary"
+                _mock: "itemSummary",
+                _autoLoading: true
             })
             data2.value = response.data.groups
         }
