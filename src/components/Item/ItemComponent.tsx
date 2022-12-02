@@ -2,6 +2,11 @@ import { defineComponent, onMounted, ref, PropType, reactive, watch } from 'vue'
 import s from './ItemComponent.module.scss'
 import { http } from '../../shared/Http';
 import { Money } from '../../shared/Money';
+import { Center } from '../../shared/Center';
+import { Icon } from '../../shared/icon';
+import { RouterLink } from 'vue-router';
+import { Button } from '../../shared/Button';
+import { FloatButton } from '../../shared/FloatButton';
 export const ItemComponent = defineComponent({
   props: {
     startDate: {
@@ -65,8 +70,23 @@ export const ItemComponent = defineComponent({
     })
     return () => (
       <div class={s.wrapper}>
-        {items.value ? (
+        {items.value && items.value.length > 0 ? (
           <>
+            <ul class={s.itemBoard}>
+              <li class={s.in}>
+                <span>收入</span>
+                <Money value={itemBalance.income} />
+              </li>
+              <li class={s.out}>
+                <span>支出</span>
+                <Money value={itemBalance.expenses} />
+              </li>
+              <li class={s.netIncome}>
+                <span>净收入</span>
+                <Money value={itemBalance.balance} />
+                {console.log(itemBalance.balance)}
+              </li>
+            </ul>
             <ol class={s.list}>
               {items.value.map((item) => (
                 <li>
@@ -83,8 +103,21 @@ export const ItemComponent = defineComponent({
                 </li>
               ))}
             </ol>
-
+            <FloatButton iconName='add' />
           </>
-        ) : (<div>记录为空</div>)} </div>)
+        )
+          : <>
+            <Center class={s.pig_wrapper}>
+              <Icon name="pig" class={s.pig} />
+            </Center>
+            <div class={s.button_wrapper}>
+
+              <RouterLink to="/Item/create">
+                <Button class={s.button} >开始记账</Button>
+              </RouterLink>
+            </div>
+          </>
+        }
+      </div>)
   }
 })

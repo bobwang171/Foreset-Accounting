@@ -18,26 +18,11 @@ export const ItemSummary = defineComponent({
     return () => (
       <>
         <div class={s.wrapper}>
-          <ul class={s.itemBoard}>
-            <li class={s.in}>
-              <span>收入</span>
-              <span>108</span>
-            </li>
-            <li class={s.out}>
-              <span>支出</span>
-              <span>102</span>
-            </li>
-            <li class={s.netIncome}>
-              <span>净收入</span>
-              <span>103</span>
-            </li>
-          </ul>
           <div class={s.itemList}>
             <ItemComponent startDate={props.startDate} endDate={props.endDate} />
           </div>
           <Form />
-          <span class={s.noMore}>没有更多</span>
-          <FloatButton iconName='add' />
+
         </div>
       </>
     )
