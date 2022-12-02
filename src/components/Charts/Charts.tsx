@@ -10,6 +10,7 @@ type Data1Item = { happen_at: string, amount: number }
 type Data2Item = { tag_id: number, tag: Tag, amount: number }
 type Data1 = Data1Item[]
 type Data2 = Data2Item[]
+type Data3 = Data2Item[]
 
 export const Charts = defineComponent({
 
@@ -109,8 +110,8 @@ export const Charts = defineComponent({
 
 
         const betterData = computed(() => {
-            const total = barData.reduce((sum, item) => sum + item.amount, 0)
-            return barData.map(item => ({
+            const total = barData.value.reduce((sum, item) => sum + item.amount, 0)
+            return barData.value.map(item => ({
                 ...item,
                 percent: Math.round(item.amount / total * 100)
             }))
@@ -143,6 +144,22 @@ export const Charts = defineComponent({
             })
             data2.value = response.data.groups
         }
+        const fetchData3 = async () => {
+            const response = await http.get<{ groups: Data2, total: number }>("/api/v1/items/summary", {
+                create_after: props.startDate,
+                created_before: props.endDate,
+                group_by: "tag_id",
+                kind: kind.value,
+                _mock: "itemSummary",
+                _autoLoading: true
+            })
+            barData.value = response.data.groups
+        }
+        onMounted(fetchData3)
+        watch(
+            () => kind.value,
+            () => fetchData3()
+        )
         onMounted(fetchData1)
         watch(
             () => kind.value,
@@ -183,11 +200,7 @@ export const Charts = defineComponent({
         })
 
 
-        const barData = reactive([
-            { tag: { id: 1, name: "房租", sign: "addTag" }, amount: 3000 },
-            { tag: { id: 2, name: "吃饭", sign: "addTag" }, amount: 1000 },
-            { tag: { id: 3, name: "娱乐", sign: "addTag" }, amount: 2000 }
-        ])
+        const barData = ref<Data2>([])
 
 
         return () => (
