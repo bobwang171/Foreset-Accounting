@@ -18,7 +18,7 @@ export const Tags = defineComponent({
     },
     setup: (props, context) => {
         const { tags, hasMore, fetchTags } = useTags((page) => {
-            return http.get<Resources<Tag>>('/tags', {
+            return http.get<Resources<Tag>>('/api/v1/tags', {
                 kind: props.kind,
                 page: page + 1,
                 _mock: 'tagIndex',
