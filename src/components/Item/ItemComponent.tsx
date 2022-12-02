@@ -7,6 +7,7 @@ import { Icon } from '../../shared/icon';
 import { RouterLink } from 'vue-router';
 import { Button } from '../../shared/Button';
 import { FloatButton } from '../../shared/FloatButton';
+import dayjs from 'dayjs';
 export const ItemComponent = defineComponent({
   props: {
     startDate: {
@@ -98,12 +99,15 @@ export const ItemComponent = defineComponent({
                       <span class={s.tag}>{item.name}</span>
                       <span class={s.amount}><Money value={item.amount} /></span>
                     </div>
-                    <div class={s.time}>{item.happen_at}</div>
+                    <div class={s.time}>{dayjs(item.happen_at).format("YYYY-MM-DD")}</div>
                   </div>
                 </li>
               ))}
             </ol>
-            <FloatButton iconName='add' />
+            <RouterLink to="/Item/create">
+              <FloatButton iconName="add" />
+            </RouterLink>
+
           </>
         )
           : <>
