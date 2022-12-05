@@ -35,12 +35,11 @@ type Resource<T> = {
 type Item = {
   id: number,
   user_id: number,
-  name:string,
   amount: number,
   happen_at:string,
   kind: "expenses" | "income",
-  sign: string,
-  tag_ids:number[]
+  tag_ids: number[],
+  tags:string[Tag]
 }
 type User = {
   id: number,

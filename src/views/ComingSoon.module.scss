@@ -1,0 +1,17 @@
+.pig {
+    width: 128px;
+    height: 130px;
+
+    &_wrapper {
+        padding: 120px 0;
+    }
+}
+
+.text_wrapper {
+    display: flex;
+    justify-content: center;
+
+    .text {
+        font-size: 48px;
+    }
+}

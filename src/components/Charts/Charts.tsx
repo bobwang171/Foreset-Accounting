@@ -10,7 +10,6 @@ type Data1Item = { happen_at: string, amount: number }
 type Data2Item = { tag_id: number, tag: Tag, amount: number }
 type Data1 = Data1Item[]
 type Data2 = Data2Item[]
-type Data3 = Data2Item[]
 
 export const Charts = defineComponent({
 

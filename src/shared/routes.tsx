@@ -13,6 +13,7 @@ import { TagEdit } from '../components/Tags/TagEdit';
 import { SignIn } from '../views/SignInPage';
 import { Statistics } from '../views/StatisticsPage';
 import { http } from './Http';
+import { ComingSoon } from '../views/ComingSoonPage';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -54,5 +55,8 @@ export const routes: RouteRecordRaw[] = [
     },
     {
         path: "/Statistics", component: Statistics,
+    },
+    {
+        path: "/ComingSoon", component: ComingSoon,
     },
 ]

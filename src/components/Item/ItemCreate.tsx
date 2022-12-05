@@ -25,6 +25,7 @@ export const ItemCreate = defineComponent({
     })
     const onSubmit = async () => {
       await http.post<Resource<Item>>("/api/v1/items", formData, { params: { _mock: "itemCreate", _autoLoading: true } })
+      router.back()
     }
     return () => (
       <MainLayout class={s.layout}>{{
@@ -34,10 +35,10 @@ export const ItemCreate = defineComponent({
           <div class={s.wrapper}>
             <Tabs v-model:selected={formData.kind} class={s.tabs}>
               <Tab name="支出" value='expenses'>
-                <Tags kind="expenses" v-model:selected={formData.tag_ids} />
+                <Tags kind="expenses" v-model:selected={formData.tag_ids[0]} />
               </Tab>
               <Tab name="收入" value='income'>
-                <Tags kind="income" v-model:selected={formData.tag_ids} />
+                <Tags kind="income" v-model:selected={formData.tag_ids[0]} />
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>

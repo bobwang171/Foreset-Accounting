@@ -10,8 +10,6 @@ export const Overlay = defineComponent({
             type: Function as PropType<() => void>
         }
     },
-
-
     setup: (props, context) => {
         const route = useRoute()
         const onSignOut = async () => {
@@ -55,23 +53,27 @@ export const Overlay = defineComponent({
                 <nav class={s.main}>
                     <ul >
                         <li>
-
+                            <RouterLink to={`/item`}>
+                                <Icon name='statistics'></Icon>
+                                <span>记账页面</span>
+                            </RouterLink>
+                        </li>
+                        <li>
                             <RouterLink to={`/statistics`}>
                                 <Icon name='statistics'></Icon>
                                 <span>统计图表</span>
                             </RouterLink>
                         </li>
                         <li>
-                            <RouterLink to={`/statistics`}>
+                            <RouterLink to={`/ComingSoon`}>
                                 <Icon name='export'></Icon>
                                 <span>导出数据</span>
                             </RouterLink>
                         </li>
-
                         <li>
-                            <RouterLink to={`/statistics`}>
+                            <RouterLink to={`/ComingSoon`}>
                                 <Icon name='notice'></Icon>
-                                <span>记账提醒</span>
+                                <span>通知提醒</span>
                             </RouterLink>
                         </li>
                     </ul>

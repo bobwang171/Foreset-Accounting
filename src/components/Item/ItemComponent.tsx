@@ -85,24 +85,27 @@ export const ItemComponent = defineComponent({
               <li class={s.netIncome}>
                 <span>净收入</span>
                 <Money value={itemBalance.balance} />
-                {console.log(itemBalance.balance)}
               </li>
             </ul>
             <ol class={s.list}>
+              {console.log(items.value)}
               {items.value.map((item) => (
+
                 <li>
                   <div class={s.sign}>
-                    <span>{item.sign}</span>
+
+                    <span>{item.tags[0].sign}</span>
                   </div>
                   <div class={s.text}>
                     <div class={s.tagAndAmount}>
-                      <span class={s.tag}>{item.name}</span>
+                      <span class={s.tag}>{item.tags[0].name}</span>
                       <span class={s.amount}><Money value={item.amount} /></span>
                     </div>
                     <div class={s.time}>{dayjs(item.happen_at).format("YYYY-MM-DD")}</div>
                   </div>
                 </li>
               ))}
+
             </ol>
             <RouterLink to="/Item/create">
               <FloatButton iconName="add" />

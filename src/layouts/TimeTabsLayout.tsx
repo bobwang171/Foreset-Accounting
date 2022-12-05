@@ -6,6 +6,7 @@ import { Form, FormItem } from '../shared/Form';
 import { OverlayIcon } from '../shared/Overlay';
 import { Tab, Tabs } from '../shared/Tabs';
 import { MainLayout } from './MainLayout';
+import { BackIcon } from '../shared/BackIcon';
 const demo = defineComponent({
     props: {
         startDate: {
