@@ -7,6 +7,7 @@ import { NumberPad } from '../../shared/NumberPad';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
 import { BackIcon } from '../../shared/BackIcon';
+import { useRouter } from 'vue-router';
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -14,17 +15,17 @@ export const ItemCreate = defineComponent({
     }
   },
   setup: (props, context) => {
-    const formData = reactive({
-      kind: "支出",
-      tags_id: [],
+    const router = useRouter()
+    const formData = reactive<Partial<Item>>({
+      kind: "expenses",
+      tag_ids: [],
       amount: 0,
-      happenAt: dayjs().format(),
+      happen_at: dayjs().format(),
 
     })
     const onSubmit = async () => {
       await http.post<Resource<Item>>("/api/v1/items", formData, { params: { _mock: "itemCreate", _autoLoading: true } })
     }
-
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
@@ -32,16 +33,16 @@ export const ItemCreate = defineComponent({
         default: () => <>
           <div class={s.wrapper}>
             <Tabs v-model:selected={formData.kind} class={s.tabs}>
-              <Tab name="支出">
-                <Tags kind="expenses" v-model:selected={formData.tags_id} />
+              <Tab name="支出" value='expenses'>
+                <Tags kind="expenses" v-model:selected={formData.tag_ids} />
               </Tab>
-              <Tab name="收入">
-                <Tags kind="income" v-model:selected={formData.tags_id} />
+              <Tab name="收入" value='income'>
+                <Tags kind="income" v-model:selected={formData.tag_ids} />
               </Tab>
             </Tabs>
             <div class={s.inputPad_wrapper}>
               <NumberPad
-                v-model:happenAt={formData.happenAt}
+                v-model:happen_at={formData.happen_at}
                 v-model:amount={formData.amount}
                 onSubmit={onSubmit}
               />

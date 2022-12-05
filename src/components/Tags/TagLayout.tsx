@@ -16,7 +16,7 @@ export const TagLayout = defineComponent({
             id: undefined,
             name: "",
             sign: "",
-            kind: route.query.kind,
+            kind: "expenses" || "income",
         })
         const errors = reactive({})
         const onError = (error: any) => {
@@ -50,7 +50,7 @@ export const TagLayout = defineComponent({
             })
             Object.assign(errors, validate(formData, rules))
             if (!hasError(errors)) {
-                const promise = await formData.id ?
+                formData.id ?
                     await http.patch(`/api/v1/tags/${formData.id}`, formData,
                         { params: { _mock: "tagEdit", _autoLoading: true } }
                     ).catch(onError)

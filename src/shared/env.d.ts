@@ -15,7 +15,8 @@ type Tag = {
   id: number,
   name: string,
   sign: any,
-  kind: income | expenses
+  kind: "income" | "expenses"
+
 
 }
 
@@ -37,8 +38,9 @@ type Item = {
   name:string,
   amount: number,
   happen_at:string,
-  kind: expenses | income,
+  kind: "expenses" | "income",
   sign: string,
+  tag_ids:number[]
 }
 type User = {
   id: number,

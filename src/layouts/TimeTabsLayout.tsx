@@ -75,19 +75,19 @@ export const TimeTabsLayout = defineComponent({
                             <>
                                 <Tabs v-model:selected={refKind.value} onUpdate:selected={() => refOverlayVisible.value = true}
                                     rerender={props.rerender}>
-                                    <Tab name='本月'>
+                                    <Tab name='本月' value='本月'>
                                         <props.component
                                             startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
                                     </Tab>
-                                    <Tab name='上月'>
+                                    <Tab name='上月' value='上月'>
                                         <props.component
                                             startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} />
                                     </Tab>
-                                    <Tab name='今年'>
+                                    <Tab name='今年' value='今年'>
                                         <props.component
                                             startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
                                     </Tab>
-                                    <Tab name='自定义' >
+                                    <Tab name='自定义' value='自定义' >
                                         <props.component
                                             startDate={customTime.start}
                                             endDate={customTime.end} />

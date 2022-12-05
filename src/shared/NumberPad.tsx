@@ -5,7 +5,7 @@ import s from './NumberPad.module.scss'
 import dayjs from 'dayjs';
 export const NumberPad = defineComponent({
   props: {
-    happenAt: {
+    happen_at: {
       type: String
     },
     amount: {
@@ -71,7 +71,7 @@ export const NumberPad = defineComponent({
     const showDatePicker = () => refDatePickerVisible.value = true
     const hideDatePicker = () => refDatePickerVisible.value = false
     const setDate = (date: Date) => {
-      context.emit("update:happenAt", date.toISOString());
+      context.emit("update:happen_at", date.toISOString());
       hideDatePicker()
     }
     return () => (
@@ -81,9 +81,9 @@ export const NumberPad = defineComponent({
             <div class={s.date}>
               <Icon name='notes' class={s.icon}></Icon>
               <span>
-                <span onClick={showDatePicker}>{dayjs(props.happenAt).format('YYYY/MM/DD')}</span>
+                <span onClick={showDatePicker}>{dayjs(props.happen_at).format('YYYY/MM/DD')}</span>
                 <Popup position='bottom' v-model:show={refDatePickerVisible.value}>
-                  <DatetimePicker modelValue={new Date(props.happenAt)} type="date" title="选择年月日" min-date={minDate} max-date={maxDate}
+                  <DatetimePicker modelValue={new Date(props.happen_at)} type="date" title="选择年月日" min-date={minDate} max-date={maxDate}
                     onConfirm={setDate} onCancel={hideDatePicker} />
                 </Popup>
               </span>

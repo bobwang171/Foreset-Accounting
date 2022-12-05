@@ -20,13 +20,13 @@ export const TagEdit = defineComponent({
     if (Number.isNaN(numberId)) {
       return () => <div>id 不存在</div>
     }
-    const onDelete = async (option?: { withItems: boolean }) => {
+    const onDelete = async (option?: { with_items: boolean }) => {
       await Dialog.confirm({
         title: "确认",
         message: "你真的要删除吗？"
       })
       await http.delete(`/api/v1/tags/${numberId}`,
-        { withItem: option?.withItems ? "true" : "false" }).catch()
+        { withItem: option?.with_items ? "true" : "false" }).catch()
       router.back()
     }
     return () => (
@@ -39,7 +39,7 @@ export const TagEdit = defineComponent({
               <TagLayout id={numberId} />
               <div class={s.actions}>
                 <Button level="danger" class={s.removeTag} onClick={() => onDelete()}>删除标签</Button>
-                <Button level='danger' class={s.removeTagAndItem} onClick={() => onDelete({ withItems: true })}>删除标签和记账</Button>
+                <Button level='danger' class={s.removeTagAndItem} onClick={() => onDelete({ with_items: true })}>删除标签和记账</Button>
               </div>
             </>
         }}</MainLayout>
