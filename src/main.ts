@@ -11,14 +11,14 @@ import { fetchMe, mePromise, } from './shared/me';
 const router = createRouter({ history, routes })
 fetchMe()
 router.beforeEach(async(to,from) => {
-    if (to.path === "/" || to.path === "/Item" || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
+    if (to.path === "/items" || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
         return true
     }
     else {
         const path = await mePromise.then(
             () => true,
             () => {
-                return '/sign_in?return_to=' + to.path
+                return '/sign_in?return_to=' + from.path
             })
         return path
     }

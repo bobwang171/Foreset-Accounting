@@ -26,11 +26,11 @@ export const StartPage = defineComponent({
                                 </Center>
                                 <div class={s.button_wrapper}>
                                     <div>
-                                        <RouterLink to="/Item">
+                                        <RouterLink to="/Items">
                                             <Button class={s.button} >开始记账</Button>
                                         </RouterLink>
                                     </div>
-                                    <RouterLink to="/Item/create">
+                                    <RouterLink to="/Items/create">
                                         <FloatButton iconName="add" />
                                     </RouterLink>
 

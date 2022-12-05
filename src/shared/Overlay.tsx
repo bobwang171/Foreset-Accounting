@@ -53,7 +53,7 @@ export const Overlay = defineComponent({
                 <nav class={s.main}>
                     <ul >
                         <li>
-                            <RouterLink to={`/item`}>
+                            <RouterLink to={`/items`}>
                                 <Icon name='statistics'></Icon>
                                 <span>记账页面</span>
                             </RouterLink>

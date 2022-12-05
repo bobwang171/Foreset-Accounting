@@ -1,6 +1,5 @@
 import { defineComponent, render } from "vue"
 import s from "./WelcomeLayout.module.scss"
-import cloud from "../../assets/icon/cloud.svg"
 import { RouterLink } from "vue-router"
 import { WelcomeLayout } from "./WelcomeLayout"
 import { SkipFeature } from "../../shared/SkipFeature"
@@ -20,7 +19,7 @@ export const Forth = {
                 buttons: () => <>
                     <SkipFeature class={s.fake} />
                     <span onClick={onClick}>
-                        <RouterLink to="/Item" >完成</RouterLink>
+                        <RouterLink to="/" >完成</RouterLink>
                     </span>
                     <SkipFeature class={s.fake} />
                 </>

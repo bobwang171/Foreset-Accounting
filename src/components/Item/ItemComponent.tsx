@@ -107,7 +107,7 @@ export const ItemComponent = defineComponent({
               ))}
 
             </ol>
-            <RouterLink to="/Item/create">
+            <RouterLink to="/Items/create">
               <FloatButton iconName="add" />
             </RouterLink>
 
@@ -119,7 +119,7 @@ export const ItemComponent = defineComponent({
             </Center>
             <div class={s.button_wrapper}>
 
-              <RouterLink to="/Item/create">
+              <RouterLink to="/Items/create">
                 <Button class={s.button} >开始记账</Button>
               </RouterLink>
             </div>
