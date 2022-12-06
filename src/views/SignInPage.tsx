@@ -94,7 +94,7 @@ export const SignIn = defineComponent({
                     icon: () => <BackIcon />,
                     default: () => <>
                         <div class={s.wrapper}>
-                            <div class={s.logo}><Icon name='mangosteen' /></div>
+                            <div class={s.logo}><Icon name='forest' /></div>
                             <Form class={s.form} onSubmit={onSubmit}>
                                 <FormItem type='text' label='邮箱地址' placeholder='请输入邮箱，然后点击发送验证码' v-model={formData.email} error={errors.email?.[0] ?? "　"}></FormItem>
                                 <div class={s.certificationCode_wrapper}>

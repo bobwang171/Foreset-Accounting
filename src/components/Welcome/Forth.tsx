@@ -19,7 +19,7 @@ export const Forth = {
                 buttons: () => <>
                     <SkipFeature class={s.fake} />
                     <span onClick={onClick}>
-                        <RouterLink to="/items" >开始记账</RouterLink>
+                        <RouterLink to="/sign_in?return_to=/items" >开始记账</RouterLink>
                     </span>
                     <SkipFeature class={s.fake} />
                 </>
