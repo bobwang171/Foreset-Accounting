@@ -9,7 +9,7 @@ export const ComingSoon = defineComponent({
         return () => (
             <MainLayout>
                 {{
-                    title: () => '山竹记账',
+                    title: () => '森林记账',
                     icon: () => <BackIcon />,
                     default: () =>
                         <>

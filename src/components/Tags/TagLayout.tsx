@@ -31,7 +31,6 @@ export const TagLayout = defineComponent({
                     _mock: "tagShow"
                 }
                 )
-                console.log(response)
                 Object.assign(formData, response.data.resource)
             } else {
                 return

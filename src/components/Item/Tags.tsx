@@ -32,8 +32,7 @@ export const Tags = defineComponent({
         const timer = ref<number>()
         const currentPoint = ref<HTMLDivElement>()
         const onLongPress = (id: number) => {
-            router.push(`/tags/${id}/edit?return_to=${router.currentRoute.value.fullPath}`)
-            console.log(id)
+            router.push(`/tags/${id}/edit`)
         }
 
         const onTouchStart = (e: TouchEvent, tag: Tag) => {

@@ -21,7 +21,7 @@ button {
 
   &.input {
     flex-grow: 1;
-    border: 1px solid #5c33be;
+    border: 1px solid #92b280;
     border-radius: 8px;
     font-size: 18px;
     font-family: inherit;
@@ -102,7 +102,7 @@ button {
 
   .removeTag,
   .removeTagAndItem {
-    width: calc(50% - 8px);
+    width: 100%;
   }
 
 

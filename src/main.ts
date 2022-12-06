@@ -10,15 +10,15 @@ import { fetchMe, mePromise, } from './shared/me';
 
 const router = createRouter({ history, routes })
 fetchMe()
-router.beforeEach(async(to,from) => {
-    if (to.path === "/items" || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
+router.beforeEach((to,from) => {
+    if (to.path.startsWith("/items") || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
         return true
     }
     else {
-        const path = await mePromise.then(
+        const path =mePromise.then(
             () => true,
             () => {
-                return '/sign_in?return_to=' + from.path
+                return '/sign_in?return_to=' + to.path
             })
         return path
     }

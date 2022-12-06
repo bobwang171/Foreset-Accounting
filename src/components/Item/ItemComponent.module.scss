@@ -54,18 +54,28 @@
 }
 
 .button_wrapper {
-    padding: 16px 16px;
+    padding: 24px 16px;
 
 }
 
 .pig {
-    width: 128px;
-    height: 130px;
+    width: 200vw;
+    height: 100vw;
 
     &_wrapper {
-        padding: 120px 0;
+        padding: 20px 0;
     }
 }
+
+.tips_wrapper {
+    display: flex;
+    justify-content: center;
+
+    .tips {
+        color: rgb(203, 196, 196);
+    }
+}
+
 
 .itemBoard {
     display: flex;

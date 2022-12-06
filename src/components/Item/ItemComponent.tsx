@@ -88,7 +88,6 @@ export const ItemComponent = defineComponent({
               </li>
             </ul>
             <ol class={s.list}>
-              {console.log(items.value)}
               {items.value.map((item) => (
 
                 <li>
@@ -115,12 +114,15 @@ export const ItemComponent = defineComponent({
         )
           : <>
             <Center class={s.pig_wrapper}>
-              <Icon name="pig" class={s.pig} />
+              <Icon name="noItems" class={s.pig} />
             </Center>
+            <div class={s.tips_wrapper}>
+              <span class={s.tips}>还没有发现账单哦，试着记一笔~</span>
+            </div>
             <div class={s.button_wrapper}>
 
               <RouterLink to="/Items/create">
-                <Button class={s.button} >开始记账</Button>
+                <Button class={s.button} >记一笔</Button>
               </RouterLink>
             </div>
           </>

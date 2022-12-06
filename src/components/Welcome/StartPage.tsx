@@ -17,7 +17,7 @@ export const StartPage = defineComponent({
             <MainLayout>
                 {
                     {
-                        title: () => "山竹记账",
+                        title: () => "森林记账",
                         icon: () => <OverlayIcon />,
                         default: () => (
                             <>

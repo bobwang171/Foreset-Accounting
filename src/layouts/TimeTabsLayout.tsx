@@ -6,7 +6,6 @@ import { Form, FormItem } from '../shared/Form';
 import { OverlayIcon } from '../shared/Overlay';
 import { Tab, Tabs } from '../shared/Tabs';
 import { MainLayout } from './MainLayout';
-import { BackIcon } from '../shared/BackIcon';
 const demo = defineComponent({
     props: {
         startDate: {
@@ -70,7 +69,7 @@ export const TimeTabsLayout = defineComponent({
             <MainLayout>
                 {
                     {
-                        title: () => "山竹记账",
+                        title: () => "森林记账",
                         icon: () => <OverlayIcon />,
                         default: () =>
                             <>
