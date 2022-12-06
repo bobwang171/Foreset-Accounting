@@ -1,17 +1,17 @@
 .pig {
-    width: 128px;
-    height: 130px;
+    width: 64vw;
+    height: 64vw;
 
     &_wrapper {
         padding: 120px 0;
     }
 }
 
-.text_wrapper {
+.tips_wrapper {
     display: flex;
     justify-content: center;
 
-    .text {
-        font-size: 48px;
+    .tips {
+        color: rgb(203, 196, 196);
     }
 }

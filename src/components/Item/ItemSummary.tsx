@@ -1,5 +1,4 @@
 import { defineComponent, PropType } from 'vue';
-import { FloatButton } from '../../shared/FloatButton';
 import s from './ItemSummary.module.scss'
 import { ItemComponent } from './ItemComponent';
 import { Form } from '../../shared/Form';

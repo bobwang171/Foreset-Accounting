@@ -98,7 +98,9 @@ export const ItemComponent = defineComponent({
                   <div class={s.text}>
                     <div class={s.tagAndAmount}>
                       <span class={s.tag}>{item.tags[0].name}</span>
-                      <span class={s.amount}><Money value={item.amount} /></span>
+                      <span class={item.kind === "income" ? s.incomeAmount : s.expensesAmount}><Money value={
+                        item.kind === "income" ?
+                          item.amount : `-${item.amount}`} /></span>
                     </div>
                     <div class={s.time}>{dayjs(item.happen_at).format("YYYY-MM-DD")}</div>
                   </div>

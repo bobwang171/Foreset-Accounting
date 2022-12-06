@@ -14,7 +14,6 @@ import { SignIn } from '../views/SignInPage';
 import { Statistics } from '../views/StatisticsPage';
 import { http } from './Http';
 import { ComingSoon } from '../views/ComingSoonPage';
-import { StartPage } from '../components/Welcome/StartPage';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -52,10 +51,6 @@ export const routes: RouteRecordRaw[] = [
     },
     {
         path: "/Sign_in", component: SignIn,
-
-    },
-    {
-        path: "/start", component: StartPage,
 
     },
     {
