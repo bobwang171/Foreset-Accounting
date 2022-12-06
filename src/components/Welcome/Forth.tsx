@@ -15,11 +15,11 @@ export const Forth = {
                 icon: () => <svg>
                     <use xlinkHref="#cloud"></use>
                 </svg>,
-                title: () => <h2>每日提醒<br />不遗漏每一笔账单</h2>,
+                title: () => <h2>云备份<br />不怕数据丢失</h2>,
                 buttons: () => <>
                     <SkipFeature class={s.fake} />
                     <span onClick={onClick}>
-                        <RouterLink to="/items" >完成</RouterLink>
+                        <RouterLink to="/items" >开始记账</RouterLink>
                     </span>
                     <SkipFeature class={s.fake} />
                 </>

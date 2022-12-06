@@ -208,7 +208,6 @@ export const Charts = defineComponent({
                     { value: "expenses", text: "支出" },
                     { value: "income", text: "收入" }
                 ]} v-model={kind.value} />
-                {kind.value}
 
                 <div class={s.lineChart} ref={lineChart}></div>
                 <div class={s.pieChart} ref={pieChart}></div>

@@ -8,9 +8,7 @@ export const First = {
     render: () => (
         <WelcomeLayout>
             {{
-                icon: () => <svg>
-                    <use xlinkHref='#noItems'></use>
-                </svg>
+                icon: () => <Icon name="noItems" class={s.icon1} />
                 ,
                 title: () => <h2>会挣钱<br />还会省钱</h2>,
                 buttons: () => <>
