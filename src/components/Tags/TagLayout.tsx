@@ -16,7 +16,7 @@ export const TagLayout = defineComponent({
             id: undefined,
             name: "",
             sign: "",
-            kind: "expenses" || "income",
+            kind: route.query.kind.toString() as ('expenses' | 'income'),
         })
         const errors = reactive({})
         const onError = (error: any) => {
@@ -57,6 +57,7 @@ export const TagLayout = defineComponent({
                     await http.post("/api/v1/tags", formData,
                         { params: { _mock: "tagCreate", _autoLoading: true } }).catch(onError)
                 router.back()
+                console.log(formData)
             }
         }
         return () => (

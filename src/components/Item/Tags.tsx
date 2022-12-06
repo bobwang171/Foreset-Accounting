@@ -32,7 +32,7 @@ export const Tags = defineComponent({
         const timer = ref<number>()
         const currentPoint = ref<HTMLDivElement>()
         const onLongPress = (id: number) => {
-            router.push(`/tags/${id}/edit`)
+            router.push(`/tags/${id}/edit?kind=${props.kind}`)
         }
 
         const onTouchStart = (e: TouchEvent, tag: Tag) => {
