@@ -10,6 +10,7 @@ export const Tabs = defineComponent({
     },
     rerender: {
       type: Boolean,
+      default: false
     }
   },
   emits: ["update:selected"],

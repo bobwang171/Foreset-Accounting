@@ -93,7 +93,7 @@ export const Charts = defineComponent({
             let data1Index = 0
             for (let i = 0; i < dateGap; i++) {
                 const time = dayjs(props.startDate).add(i, "day").valueOf()
-                if (data1.value[data1Index] && dayjs(data1.value[data1Index].happen_at).valueOf() === time) {
+                if (data1.value[data1Index] && dayjs(data1.value[data1Index].happen_at + "T00:00:00.000+0800").valueOf() === time) {
                     array.push([dayjs(time).toISOString(), data1.value[data1Index].amount])
                     data1Index += 1
                 } else {

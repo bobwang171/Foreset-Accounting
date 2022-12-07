@@ -114,7 +114,9 @@ export const ItemComponent = defineComponent({
 
           </>
         )
-          : <>
+          :
+
+          <>
             <Center class={s.pig_wrapper}>
               <Icon name="noItems" class={s.pig} />
             </Center>
