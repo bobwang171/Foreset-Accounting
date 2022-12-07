@@ -92,7 +92,7 @@ export const TimeTabsLayout = defineComponent({
                                         <props.component
                                             startDate={customTime.start}
                                             endDate={customTime.end} />
-                                        <Overlay show={refOverlayVisible.value} >
+                                        <Overlay show={refOverlayVisible.value} class={s.overlay}>
                                             <div class={s.wrapper}>
                                                 <div class={s.block}>
                                                     <header><span>请选择时间</span></header>

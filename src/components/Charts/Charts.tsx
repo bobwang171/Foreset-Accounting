@@ -209,7 +209,7 @@ export const Charts = defineComponent({
                     { value: "expenses", text: "支出" },
                     { value: "income", text: "收入" }
                 ]} v-model={kind.value} />
-                <div class={barData.value.length === 0 ? s.mask : ""}>
+                <div class={barData.value.length === 0 ? s.mask : s.hidden}>
                     <Center class={s.noData_wrapper}>
                         <Icon name="noData" class={s.noData} />
                     </Center>
@@ -226,7 +226,9 @@ export const Charts = defineComponent({
                             return (
                                 <div class={s.wrapper}>
 
-                                    <Icon name="addTag" class={s.icon} />
+                                    <div class={s.icon} >
+                                        {tag.sign}
+                                    </div>
 
                                     <div class={s.body}>
                                         <div class={s.nameAndAmount}>

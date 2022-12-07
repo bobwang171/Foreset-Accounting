@@ -17,6 +17,9 @@
     }
 }
 
+.overlay {
+    z-index: 8;
+}
 
 .wrapper {
     display: flex;

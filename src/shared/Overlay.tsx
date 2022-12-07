@@ -18,7 +18,7 @@ export const Overlay = defineComponent({
                 message: "确认要退出吗？"
             })
             localStorage.removeItem("jwt")
-            location.reload()
+            window.location.reload()
         }
         const close = () => {
             props.onClose?.()
