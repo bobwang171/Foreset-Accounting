@@ -6,6 +6,7 @@ import { Icon } from '../../shared/icon';
 import { getMoney, Money } from '../../shared/Money';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
+import { Center } from '../../shared/Center';
 type Data1Item = { happen_at: string, amount: number }
 type Data2Item = { tag_id: number, tag: Tag, amount: number }
 type Data1 = Data1Item[]
@@ -208,8 +209,16 @@ export const Charts = defineComponent({
                     { value: "expenses", text: "支出" },
                     { value: "income", text: "收入" }
                 ]} v-model={kind.value} />
-
+                <div class={barData.value.length === 0 ? s.mask : ""}>
+                    <Center class={s.noData_wrapper}>
+                        <Icon name="noData" class={s.noData} />
+                    </Center>
+                    <div class={s.tips_wrapper}>
+                        <span class={s.tips}>暂无数据</span>
+                    </div>
+                </div>
                 <div class={s.lineChart} ref={lineChart}></div>
+
                 <div class={s.pieChart} ref={pieChart}></div>
                 <div class={s.barChart}>
                     {
@@ -239,6 +248,7 @@ export const Charts = defineComponent({
                         })
                     }
                 </div>
+
             </div >
         )
     }

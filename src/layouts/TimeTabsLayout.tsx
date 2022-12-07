@@ -56,14 +56,7 @@ export const TimeTabsLayout = defineComponent({
             [time.startOf("month"), time.endOf("month")],
             [time.subtract(1, "month").startOf("month"), time.subtract(1, "month").endOf("month")],
             [time.startOf("year"), time.endOf("year")]
-
-
         ]
-        watchEffect(() => {
-            if (refKind.value === "自定义") {
-                refOverlayVisible.value = true
-            }
-        })
 
         return () => (
             <MainLayout>
@@ -79,7 +72,7 @@ export const TimeTabsLayout = defineComponent({
                                         <props.component
                                             startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
                                     </Tab>
-                                    <Tab name='上月' value='上月'>
+                                    <Tab name='上月' value='上月' >
                                         <props.component
                                             startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} />
                                     </Tab>
