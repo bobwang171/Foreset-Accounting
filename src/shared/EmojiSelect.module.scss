@@ -1,6 +1,7 @@
 .emojiList {
   flex-grow: 1;
-  border: 1px solid #5C33BE;
+  border: 1px solid #92b280;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
   font-size: 14px;
 
@@ -52,7 +53,7 @@
       text-align: center;
 
       &.selectedEmoji {
-        outline: 1px solid #5C33BE;
+        outline: 2px solid #5eb670;
         border-radius: 8px;
       }
     }
