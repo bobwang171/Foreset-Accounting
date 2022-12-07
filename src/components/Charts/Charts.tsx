@@ -30,6 +30,9 @@ export const Charts = defineComponent({
         const kind = ref("expenses")
 
         const lineChartOption = {
+            color: [
+                "#006400"
+            ],
             tooltip: {
                 show: true,
                 trigger: 'axis',
@@ -71,6 +74,15 @@ export const Charts = defineComponent({
                     return `${name}  ￥${getMoney(value)}  (${percent}%)`
                 }
             },
+            color: [
+                "#eba953",
+                "#53a867",
+                "#FFFF00",
+                "#964B00",
+                "#D2691E",
+                "#006400"
+
+            ],
             series: [
                 {
                     type: 'pie',

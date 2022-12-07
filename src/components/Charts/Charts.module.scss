@@ -123,7 +123,25 @@
 
         &:nth-child(3) {
             .bar_inner {
-                background: #91cc75;
+                background: #FFFF00;
+            }
+        }
+
+        &:nth-child(4) {
+            .bar_inner {
+                background: #964B00;
+            }
+        }
+
+        &:nth-child(5) {
+            .bar_inner {
+                background: #D2691E;
+            }
+        }
+
+        &:nth-child(6) {
+            .bar_inner {
+                background: #006400;
             }
         }
 
