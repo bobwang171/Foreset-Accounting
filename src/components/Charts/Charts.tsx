@@ -124,8 +124,8 @@ export const Charts = defineComponent({
         )
         const fetchData1 = async () => {
             const response = await http.get<{ groups: Data1, total: number }>('/api/v1/items/summary', {
-                create_after: props.startDate,
-                created_before: props.endDate,
+                happen_after: props.startDate,
+                happen_before: props.endDate,
                 group_by: "happen_at",
                 kind: kind.value,
                 _mock: "itemSummary",
@@ -135,8 +135,8 @@ export const Charts = defineComponent({
         }
         const fetchData2 = async () => {
             const response = await http.get<{ groups: Data2, total: number }>("/api/v1/items/summary", {
-                create_after: props.startDate,
-                created_before: props.endDate,
+                happen_after: props.startDate,
+                happen_before: props.endDate,
                 group_by: "tag_id",
                 kind: kind.value,
                 _mock: "itemSummary",
@@ -146,8 +146,8 @@ export const Charts = defineComponent({
         }
         const fetchData3 = async () => {
             const response = await http.get<{ groups: Data2, total: number }>("/api/v1/items/summary", {
-                create_after: props.startDate,
-                created_before: props.endDate,
+                happen_after: props.startDate,
+                happen_before: props.endDate,
                 group_by: "tag_id",
                 kind: kind.value,
                 _mock: "itemSummary",

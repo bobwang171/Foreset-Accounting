@@ -24,8 +24,8 @@ export const ItemComponent = defineComponent({
     const fetchItems = async () => {
       if (!props.startDate || !props.endDate) { return }
       const response = await http.get<Resources<Item>>('/api/v1/items', {
-        created_after: props.startDate,
-        created_before: props.endDate,
+        happen_after: props.startDate,
+        happen_before: props.endDate,
         page: page.value + 1,
         _mock: 'itemIndex',
         _autoLoading: true
@@ -52,8 +52,8 @@ export const ItemComponent = defineComponent({
     const fetchBalance = async () => {
       if (!props.startDate || !props.endDate) { return }
       const response = await http.get("/api/v1/items/balance", {
-        created_after: props.startDate,
-        created_before: props.endDate,
+        happen_after: props.startDate,
+        happen_before: props.endDate,
         page: page.value + 1,
         _mock: "itemIndexBalance"
       })
