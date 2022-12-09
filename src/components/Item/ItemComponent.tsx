@@ -16,6 +16,9 @@ export const ItemComponent = defineComponent({
     endDate: {
       type: String as PropType<string>,
     },
+    tagName: {
+      type: String as PropType<string>,
+    }
   },
   setup: (props, context) => {
     const items = ref<Item[]>([])
@@ -121,7 +124,7 @@ export const ItemComponent = defineComponent({
               <Icon name="noItems" class={s.pig} />
             </Center>
             <div class={s.tips_wrapper}>
-              <span class={s.tips}>还没有发现账单哦，试着记一笔~</span>
+              <span class={s.tips}>{`${props.tagName}没有发现账单哦，试着记一笔~`}</span>
             </div>
             <div class={s.button_wrapper}>
 

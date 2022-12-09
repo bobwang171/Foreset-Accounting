@@ -16,6 +16,9 @@ const demo = defineComponent({
         endDate: {
             type: String as PropType<string>,
 
+        },
+        tagName: {
+            type: String as PropType<string>,
         }
     }
 })
@@ -79,20 +82,21 @@ export const TimeTabsLayout = defineComponent({
                                     rerender={props.rerender}>
                                     <Tab name='本月' value='本月'>
                                         <props.component
-                                            startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} />
+                                            startDate={timeList[0][0].format()} endDate={timeList[0][1].format()} tagName="本月" />
                                     </Tab>
                                     <Tab name='上月' value='上月'>
                                         <props.component
-                                            startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} />
+                                            startDate={timeList[1][0].format()} endDate={timeList[1][1].format()} tagName="上月" />
                                     </Tab>
                                     <Tab name='今年' value='今年'>
                                         <props.component
-                                            startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} />
+                                            startDate={timeList[2][0].format()} endDate={timeList[2][1].format()} tagName="今年" />
                                     </Tab>
                                     <Tab name='自定义' value='自定义' >
                                         <props.component
                                             startDate={customTime.start}
-                                            endDate={customTime.end} />
+                                            endDate={customTime.end}
+                                            tagName="时间范围内" />
                                         <Overlay show={refOverlayVisible.value} class={s.overlay}>
                                             <div class={s.wrapper}>
                                                 <div class={s.block}>
