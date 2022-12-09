@@ -1,11 +1,12 @@
 import dayjs from 'dayjs';
 import { Overlay } from 'vant';
-import { defineComponent, PropType, reactive, ref, watch, watchEffect } from 'vue';
+import { defineComponent, PropType, reactive, ref, watch, watchEffect, defineAsyncComponent } from 'vue';
 import s from './TimeTabsLayout.module.scss'
 import { Form, FormItem } from '../shared/Form';
 import { OverlayIcon } from '../shared/Overlay';
 import { Tab, Tabs } from '../shared/Tabs';
 import { MainLayout } from './MainLayout';
+
 const demo = defineComponent({
     props: {
         startDate: {

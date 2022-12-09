@@ -1,7 +1,7 @@
 import { defineComponent, onMounted, PropType, ref } from 'vue';
 import s from './Overlay.module.scss'
 import { Icon } from './icon';
-import { RouterLink, useRoute, useRouter } from 'vue-router';
+import { RouterLink, useRoute, } from 'vue-router';
 import { mePromise } from './me';
 import { Dialog } from 'vant';
 export const Overlay = defineComponent({
@@ -51,7 +51,7 @@ export const Overlay = defineComponent({
 
 
                 <nav class={s.main}>
-                    <ul >
+                    <ul onClick={close}>
                         <li>
                             <RouterLink to={`/items`}>
                                 <Icon name='note'></Icon>

@@ -13,11 +13,13 @@ export const ComingSoon = defineComponent({
                     icon: () => <BackIcon />,
                     default: () =>
                         <>
-                            <Center class={s.pig_wrapper}>
-                                <Icon name="comingSoon" class={s.pig} />
-                            </Center>
-                            <div class={s.tips_wrapper}>
-                                <span class={s.tips}>功能尚未开发，敬请期待哦~</span>
+                            <div class={s.wrapper}>
+                                <Center class={s.pig_wrapper}>
+                                    <Icon name="comingSoon" class={s.pig} />
+                                </Center>
+                                <div class={s.tips_wrapper}>
+                                    <span class={s.tips}>功能尚未开发，敬请期待哦~</span>
+                                </div>
                             </div>
                         </>
                 }}
