@@ -6,8 +6,8 @@ import { Tags } from './Tags';
 import { NumberPad } from '../../shared/NumberPad';
 import dayjs from 'dayjs';
 import { http } from '../../shared/Http';
-import { BackIcon } from '../../shared/BackIcon';
-import { useRouter } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+import { Icon } from '../../shared/icon';
 export const ItemCreate = defineComponent({
   props: {
     name: {
@@ -30,7 +30,9 @@ export const ItemCreate = defineComponent({
     return () => (
       <MainLayout class={s.layout}>{{
         title: () => '记一笔',
-        icon: () => <BackIcon class={s.navIcon} />,
+        icon: () => <RouterLink to="/items" class={s.navIcon} >
+          <Icon name='return' />
+        </RouterLink>,
         default: () => <>
           <div class={s.wrapper}>
             <Tabs v-model:selected={formData.kind} class={s.tabs}>

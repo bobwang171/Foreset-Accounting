@@ -12,7 +12,6 @@ import { TagCreate } from '../components/Tags/TagCreate';
 import { TagEdit } from '../components/Tags/TagEdit';
 import { SignIn } from '../views/SignInPage';
 import { Statistics } from '../views/StatisticsPage';
-import { http } from './Http';
 import { ComingSoon } from '../views/ComingSoonPage';
 
 
@@ -33,10 +32,8 @@ export const routes: RouteRecordRaw[] = [
         ]
     },
     {
+
         path: "/Items", component: ItemPage,
-        beforeEnter: (to, from, next) => {
-            http.get("/api/v1/me").then(() => next())
-        },
         children: [
             { path: "", component: ItemList },
             { path: "create", component: ItemCreate }

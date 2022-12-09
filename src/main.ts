@@ -11,7 +11,7 @@ import { fetchMe, mePromise, } from './shared/me';
 const router = createRouter({ history, routes })
 fetchMe()
 router.beforeEach((to,from) => {
-    if (to.path.startsWith("/items") || to.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
+    if (to.path==="/Items" || to.path.startsWith("/welcome") ||from.path.startsWith("/welcome") || to.path.startsWith("/sign_in")) {
         return true
     }
     else {

@@ -18,9 +18,9 @@ export const Forth = {
                 title: () => <h2>云备份<br />不怕数据丢失</h2>,
                 buttons: () => <>
                     <SkipFeature class={s.fake} />
-                    <span onClick={onClick}>
-                        <RouterLink to="/sign_in?return_to=/items" >开始记账</RouterLink>
-                    </span>
+                    <RouterLink to="/items" >
+                        <span onClick={onClick}>开始记账</span>
+                    </RouterLink>
                     <SkipFeature class={s.fake} />
                 </>
             }}

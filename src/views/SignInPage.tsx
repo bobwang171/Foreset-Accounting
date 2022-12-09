@@ -5,7 +5,7 @@ import { Icon } from '../shared/icon';
 import { Form, FormItem } from '../shared/Form';
 import { Button } from '../shared/Button';
 import { validate, hasError } from '../shared/Validate';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter, RouterLink } from 'vue-router';
 import { http } from '../shared/Http';
 import { refreshMe } from '../shared/me';
 import { BackIcon } from '../shared/BackIcon';
