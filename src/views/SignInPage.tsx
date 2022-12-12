@@ -30,6 +30,7 @@ export const SignIn = defineComponent({
         const route = useRoute()
 
         const onSubmit = async (e: Event) => {
+
             e.preventDefault()
             Object.assign(errors, {
                 email: [], code: []
